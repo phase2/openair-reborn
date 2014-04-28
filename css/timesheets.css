@@ -1,0 +1,429 @@
+body, #timesheet-table td, input, select, textarea, #timesheet-table font{
+  font-size:14px!important;
+  line-height:20px;
+}
+
+body tr.formheader,
+body tr.formfooter {
+  background: none;
+}
+
+body table.formBox {
+  background: transparent none;
+  margin: 10px 0 0;
+  border: 0;
+  border-top: 2px solid #eee;
+}
+
+.main-timesheet table {
+  width: 100%!important;
+}
+
+#timesheet-table {
+  margin-bottom: 0;
+}
+
+#timesheet-table select {
+  width:400px;
+}
+
+body .table td {
+  padding: 5px;
+}
+
+
+#timesheet-table td.project-cell {
+  width: 440px;
+}
+
+.improve-notes-preview {
+  position:absolute;
+  background:#fff;
+  padding: 20px;
+  border:1px solid #333;
+}
+
+.project-cell .chzn-container,
+.project-cell select  {
+  margin:5px 0;
+  display:block!important;
+}
+
+/*   Form Elements   */
+.btn {
+    border:1px solid #333;
+}
+
+#timesheet-table td > input,
+#timesheet-table td > nobr > input{
+  width:auto;
+}
+
+#timesheet-table input{
+  min-height:30px;
+  margin:0!important;
+  border: 1px solid #333;
+}
+
+.chzn-single{
+  min-height: 28px;
+}
+
+.chzn-single span{
+  padding: 4px 6px;
+  line-height:20px;
+}
+
+.chzn-drop{
+  margin-top:-3px;
+}
+
+.chzn-container-single .chzn-single div b{
+  background-position: 0px 6px;
+}
+
+.chzn-container-single .chzn-single.chzn-single-with-drop div b {
+  background-position: -18px 4px;
+}
+
+body table.banner {
+  background: none;
+  border-bottom: 1px solid #444;
+}
+
+body td.primarytableftactive {
+  background: #eee;
+  border-radius: 3px 0 0 0;
+  padding: 3px 4px 0;
+}
+body td.primarytabrightactive {
+  background: #eee;
+  border-radius: 0 3px 0 0;
+  padding: 3px 0 0;
+}
+
+body table.navigationsubtabs {
+  background:#eee;
+  padding-top:5px;
+}
+
+body td.primaryTabLeftReverse,
+body td.primaryTabRightReverse {
+  background: none;
+}
+
+tr.table-header-row td {
+  text-align: center;
+}
+
+#timesheet-table td.entry-cell {
+  width: 100px;
+}
+
+#timesheet-table td.entry-cell input {
+  width:110px;
+}
+
+.entry-wrapper {
+  position:relative;
+}
+
+.entry-wrapper input {
+  padding: 35px 12px 45px!important;
+  font-size:20px!important;
+  text-align: center;
+}
+
+.btn-group{
+  padding:5px 0;
+}
+
+/* Styles to mark today */
+#timesheet-table .entry-wrapper input{
+  border-color: #ddd;
+  background-color: transparent;
+}
+
+#timesheet-table .entry-wrapper.today input {
+  border-color: #999;
+  background: #fff;
+}
+
+.start-timer {
+  position:absolute;
+  bottom:2px;
+  left:0;
+  width:100%;
+  text-align: center;
+  cursor: pointer;
+  font-size:11px;
+}
+
+#timesheet-table .entry-wrapper input.running-timer {
+  background-color: #d7f3d2;
+}
+
+.btn-link {
+  border-color:transparent!important;
+}
+
+td.no-longer-used {
+  display:none;
+}
+
+.totals-row {
+  border-bottom: 1px solid #ddd;
+}
+
+table tr.totals-row td.project-cell {
+  font-size: 20px!important;
+  padding-top: 12px;
+}
+
+
+.total-cell input {
+  border:0 !important;
+  box-shadow: none!important;
+  background:transparent!important;
+  width:90px!important;
+  text-align:center!important;
+  padding-top:32px!important;
+  font-size:20px!important;
+}
+
+.totals-row .total-cell input {
+  padding: 0!important;
+}
+
+#page_footer {
+  background: #eee;
+}
+
+.enhanced-note {
+  margin-left:25px;
+}
+
+.popover{
+  width:400px!important;
+}
+
+.popover-inner textarea{
+  width:100%;
+}
+
+.tooltip-notes .instructions {
+  width: 50%;
+}
+
+.tooltip-notes .instructions sub {
+  line-height: 14px;
+}
+
+.alert-message {
+  border-radius: 5px;
+  border:1px solid #b3e0aa;
+  width:400px;
+}
+
+.alert-message .close {
+  line-height: 15px;
+  font-size: 14px !important;
+  opacity: 0.5;
+}
+
+.autosave-wrapper {
+  position: absolute;
+  right:15px;
+  margin-top:-20px;
+}
+
+.autosave-wrapper label {
+  display:inline;
+  padding-left:5px;
+}
+
+#timesheet-table .autosave-wrapper input {
+  min-height: 10px;
+}
+
+.popover-group{
+  margin: 5px 0;
+}
+.popover-group .btn{
+  margin-right: 5px;
+}
+
+.popover-group .btn:last-child{
+  margin-right: 0;
+}
+
+.formBox > tbody > tr > td:first-child {
+  display:none;
+}
+
+.formBox > tbody > tr.formFooter > td:first-child {
+  display:table-cell;
+}
+
+/* Disabled Cells */
+#timesheet-table .entry-cell.disabled {
+  background-color: #efefef!important;
+}
+
+#timesheet-table .entry-cell.disabled  input {
+  padding: 35px 12px 45px;
+  border-color: #ddd;
+  background: #eaeaea;
+}
+
+/* Slimline Styles */
+
+body.slimline, .slimline #timesheet-table td,
+.slimline input, .slimline select, .slimline textarea,
+.slimline #timesheet-table font {
+  font-size:13px!important;
+  line-height:16px;
+}
+
+
+.slimline .entry-wrapper input {
+  padding: 27px 12px 27px!important;
+  font-size: 18px!important;
+}
+
+.slimline .chzn-single{
+  min-height: 18px;
+}
+
+.slimline .chzn-single span{
+  padding: 3px 6px;
+  line-height:14px;
+}
+
+.slimline #timesheet-table td.project-cell {
+  width: 420px;
+}
+
+.slimline .chzn-container-single .chzn-single div b{
+  background-position: 0px 2px;
+}
+
+.slimline .chzn-container-single .chzn-single.chzn-single-with-drop div b {
+  background-position: -16px 4px;
+}
+
+/* Chosen reset/deselect button */
+.slimline .chzn-container-single .chzn-single abbr {
+  top: 6px!important;
+}
+
+.slimline font:first-child .chzn-container-single {
+  margin: 0 0 5px;
+}
+
+.slimline font:last-child .chzn-container-single {
+  margin: 5px 0 0;
+}
+
+.slimline #timesheet-table td.entry-cell {
+  width: 90px;
+}
+
+.slimline #timesheet-table td.entry-cell input {
+  width:90px;
+}
+
+
+.slimline body .table tr.add-rows td {
+  padding: 0 5px;
+}
+
+.slimline table tr.totals-row td.project-cell {
+  font-size: 18px!important;
+}
+
+.slimline .total-cell input {
+  padding-top:26px!important;
+  font-size:18px!important;
+}
+
+.slimline .totals-row .total-cell input {
+  padding-top: 3px!important;
+}
+
+
+.slimline .chzn-container-single .chzn-single {
+  height: 22px;
+  line-height: 22px;
+}
+
+/* Disabled Cells */
+
+.slimline #timesheet-table .entry-cell.disabled  input {
+  padding: 27px 12px;
+}
+
+/* Single Line Styles */
+.single .chzn-container {
+  float:left;
+  margin-right: 5px;
+}
+
+.single #timesheet-table td.project-cell {
+  width: 810px;
+}
+
+.single #timesheet-table td.project-cell select {
+  float:left;
+  margin-right: 5px !important;
+}
+
+.single #timesheet-table td.entry-cell {
+  width: 55px;
+}
+
+.single #timesheet-table td.entry-cell input {
+  padding: 5px!important;
+  font-size: 14px!important;
+  line-height: 16px;
+  width: 55px;
+  margin-top: 5px!important;
+  height:100%;
+}
+
+.single #timesheet-table .total-cell input {
+  width: 55px!important;
+  font-size: 14px!important;
+  padding: 5px!important;
+  margin-top: 5px!important;
+}
+
+.single #timesheet-table td.entry-cell .start-timer {
+  display: none;
+}
+
+.single #timesheet-table {
+  width:auto!important;
+  min-width: 1308px!important;
+}
+
+.single .table-header-row a img {
+  display: none;
+}
+
+.single .chzn-container-single .chzn-single div b{
+  background-position: 0px 5px;
+}
+
+.single .chzn-container-single .chzn-single.chzn-single-with-drop div b {
+  background-position: -16px 5px;
+}
+
+/* Chosen reset/deselect button */
+.single .chzn-container-single .chzn-single abbr {
+  top: 9px!important;
+}
+
+.wrapper {
+  padding:10px;
+}

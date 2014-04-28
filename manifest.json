@@ -1,0 +1,19 @@
+{
+  "name": "OpenAir Reborn",
+  "manifest_version": 2,
+  "description": "Improves the interface for OpenAir Timesheets.",
+  "version": "0.1.0",
+  "icons": {
+    "128": "icon128.png",
+    "16": "icon16.png",
+    "48": "icon48.png"
+  },
+  "permissions": [ "https://www.openair.com/*" ],
+  "content_scripts": [
+    {
+      "css": [ "css/timesheets.css" ],
+      "js": [ "lib/jquery-2.1.0.min.js", "js/timesheets.js" ],
+      "matches": [ "https://www.openair.com/timesheet.pl*" ]
+    }
+  ]
+}
