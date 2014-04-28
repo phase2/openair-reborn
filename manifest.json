@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "css": [ "css/timesheets.css" ],
-      "js": [ "lib/jquery-2.1.0.min.js", "js/timesheets.js" ],
+      "js": [ "lib/jquery-2.1.0.min.js", "js/timesheets.js", "js/table.js" ],
       "matches": [ "https://www.openair.com/timesheet.pl*" ]
     }
   ]
