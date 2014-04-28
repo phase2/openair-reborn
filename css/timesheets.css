@@ -55,7 +55,7 @@
   display: inline-block;
 }
 
-.oa3_ui input[type="submit"] {
+.oa3_ui input[type="submit"].p2_submit {
   padding: 1px 1.5em;
   font-size: 18px !important;
   font-weight: 100 !important;
