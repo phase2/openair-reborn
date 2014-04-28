@@ -15,3 +15,31 @@
   padding-left: 4em;
   margin-top: 2em;
 }
+
+#p2_sidebar h2 {
+  font-weight: bold;
+  color: white;
+  background: black;
+  padding: 0.5em 1em;
+}
+
+#p2_sidebar .total {
+  font-weight: bold;
+}
+
+#p2_sidebar table {
+  width: 100%;
+}
+
+#p2_sidebar > div {
+  background-color: rgba(245, 241, 238, 1);
+  margin-top: 0.5em;
+}
+
+#p2_sidebar .sidebar-inner {
+  padding: 1em;
+}
+
+#p2_sidebar .chart img {
+  width: 100%;
+}
