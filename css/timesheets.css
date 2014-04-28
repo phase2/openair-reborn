@@ -15,3 +15,59 @@
   padding-left: 4em;
   margin-top: 2em;
 }
+
+.p2_form-wrapper {
+  display: block;
+  width: 100%;
+  margin-left: -4em;
+  padding: 1.5em 0 1.5em 4em;
+  background-color: #c7ddeb;
+  clear: both;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.p2_form-row {
+  width: 100%;
+  padding: 0 4em 1em 0;
+  box-sizing: border-box;
+}
+
+.p2_form-label {
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.p2_input-field {
+  width: 98%;
+  line-height: 22px;
+}
+
+.p2_one-third {
+  width: 33%;
+  padding-right: 1em;
+  float: left;
+  box-sizing: border-box;
+}
+
+.p2_form-submit_button {
+  display: inline-block;
+}
+
+.oa3_ui input[type="submit"] {
+  padding: 1px 1.5em;
+  font-size: 18px !important;
+  font-weight: 100 !important;
+  line-height: 22px !important;
+  letter-spacing: 1px;
+  float: left !important;
+}
+
+#p2_how_long {
+  width: 125px;
+  position: relative;
+  margin-top: 0px;
+  top: -9px;
+}
+
