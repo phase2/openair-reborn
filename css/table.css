@@ -1,0 +1,37 @@
+.p2TimeTableWrapper h1 {
+	font-weight: normal !important;
+	margin: 30px 0 8px 0 !important;
+}
+
+.p2TimeTableWrapper table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+.p2TimeTableWrapper table tr td {
+	border-bottom: 2px solid #f5f2ed;
+	padding-bottom: 2px;
+}
+
+.p2TimeTableWrapper .p2timeWorkingOn {
+	font-weight: bold;
+	width: 50%;
+}
+
+.p2TimeTableWrapper .p2WhichClient {
+	width: 25%;
+}
+
+.p2TimeTableWrapper .p2TimeSpent {
+	font-weight: bold;
+}
+
+.p2TimeTableWrapper .p2EditThis a:link, .p2TimeTableWrapper .p2EditThis a:visited {
+	text-decoration: none;
+	color: #a8bd35;
+}
+
+.p2TimeTableWrapper .p2EditThis a:hover {
+	font-weight: bold;
+}
