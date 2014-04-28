@@ -11,7 +11,7 @@
 
 .p2TimeTableWrapper table tr td {
 	border-bottom: 2px solid #f5f2ed;
-	padding-bottom: 2px;
+	padding: 7px 0;
 }
 
 .p2TimeTableWrapper .p2timeWorkingOn {
