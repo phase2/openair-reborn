@@ -1,0 +1,17 @@
+<!--
+  This template loads for the 'tab.adopt' state (app.js)
+-->
+<ion-view title="Running TImers">
+  <ion-content has-header="true" has-tabs="true">
+    <ion-list option-buttons="runningTaskEnd">
+    <div ng-repeat="project in runningTimersTab">
+      <ion-item>
+        <h2>{{project.ProjectName}}</h2>
+        </ion-item>
+      <ion-item ng-repeat="task in project.ProjectTasks" item="task">
+        {{task.TaskName}} - {{task.hoursTime}}h, {{task.minutesTime}}m, {{task.secondsTime}}s
+      </ion-item>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
