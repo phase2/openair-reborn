@@ -15,5 +15,14 @@
       "js": [ "lib/jquery-2.1.0.min.js", "js/timesheets.js", "js/form.js", "js/table.js" ],
       "matches": [ "https://www.openair.com/timesheet.pl*" ]
     }
-  ]
+  ],
+
+  "browser_action": {
+      "default_icon": {                    // optional
+        "19": "icon16.png",           // optional
+        "38": "icon48.png"            // optional
+      },
+      "default_title": "OpenAir Reborn",      // optional; shown in tooltip
+      "default_popup": "timetracker/index.html"        // optional
+    }
 }
