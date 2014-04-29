@@ -9,6 +9,14 @@
 	border-collapse: separate;
 }
 
+.p2TimeTableWrapper table tr {
+	opacity: 0.60;
+}
+
+.p2TimeTableWrapper table tr:hover {
+	opacity: 1;
+}
+
 .p2TimeTableWrapper table tr td {
 	border-bottom: 2px solid #f5f2ed;
 	padding: 7px 0;
@@ -16,15 +24,28 @@
 
 .p2TimeTableWrapper .p2timeWorkingOn {
 	font-weight: bold;
-	width: 50%;
+	width: 45%;
+	padding-right: 50px;
 }
 
 .p2TimeTableWrapper .p2WhichClient {
 	width: 25%;
+	padding-right: 15px;
+}
+
+.p2TimeTableWrapper .p2ProjectStatus {
+	width: 10%;
 }
 
 .p2TimeTableWrapper .p2TimeSpent {
 	font-weight: bold;
+	width: 5%;
+	text-align: center;
+}
+
+.p2TimeTableWrapper .p2EditThis {
+	width: 5%;
+	text-align: center;
 }
 
 .p2TimeTableWrapper .p2EditThis a:link, .p2TimeTableWrapper .p2EditThis a:visited {
@@ -34,4 +55,24 @@
 
 .p2TimeTableWrapper .p2EditThis a:hover {
 	font-weight: bold;
+	zoom: 125%;
+}
+
+.p2TimeTableWrapper .p2DeleteThis {
+	width: 5%;
+	text-align: center;
+}
+
+.p2TimeTableWrapper .p2DeleteThis a:link, .p2TimeTableWrapper .p2DeleteThis a:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+.p2TimeTableWrapper .p2DeleteThis a:hover {
+	font-weight: bold;
+	zoom: 125%;
+}
+
+.p2TimeTableWrapper:last-child {
+	margin-bottom: 75px;
 }
