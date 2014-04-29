@@ -35,7 +35,7 @@ function addFillerSidebar() {
 
 function addPreviewButton() {
   $('#timesheet_savebutton').insertBefore('#save_grid_submit');
-  $('<button id="p2_preview" class="btn-oa">Preview</button>').insertBefore('#save_grid_submit');
+  $('<button id="p2_preview" class="btn-oa">Preview</button>').insertAfter('#timesheet_savebutton');
 
   $('#p2_preview').click(function(e) {
     e.preventDefault();

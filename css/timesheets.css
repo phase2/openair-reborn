@@ -50,7 +50,7 @@
   padding: 1.5em 0 1.5em 4em;
   background-color: #c7ddeb;
   clear: both;
-  overflow: hidden;
+  overflow: visible;
   box-sizing: border-box;
 }
 
@@ -71,15 +71,23 @@
   line-height: 22px;
 }
 
-.p2_one-third {
-  width: 33%;
+.p2_form-input_group {
   padding-right: 1em;
   float: left;
   box-sizing: border-box;
+  padding-top: 1em;
 }
+
+.p2_one-whole { width: 100%; padding-top: 0; }
+
+.p2_which_client_wrapper { width: 25%; }
+.p2_which_task_wrapper { width: 25%; }
+.p2_when_wrapper { width: 15%; }
+.p2_how_long_wrapper { width: 15%; }
 
 .p2_form-submit_button {
   display: inline-block;
+  margin-top: 2.6em;
 }
 
 .oa3_ui input[type="submit"].p2_submit {
@@ -89,11 +97,4 @@
   line-height: 22px !important;
   letter-spacing: 1px;
   float: left !important;
-}
-
-#p2_how_long {
-  width: 125px;
-  position: relative;
-  margin-top: 0px;
-  top: -9px;
 }
