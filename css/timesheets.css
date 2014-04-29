@@ -50,7 +50,7 @@
   padding: 1.5em 0 1.5em 4em;
   background-color: #c7ddeb;
   clear: both;
-  overflow: hidden;
+  overflow: visible;
   box-sizing: border-box;
 }
 
