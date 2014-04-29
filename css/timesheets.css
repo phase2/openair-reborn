@@ -46,8 +46,7 @@
 .p2_form-wrapper {
   display: block;
   width: 100%;
-  margin-left: -4em;
-  padding: 1.5em 0 1.5em 4em;
+  padding: 1.5em 0px 0.75em 2em;
   background-color: #c7ddeb;
   clear: both;
   overflow: visible;
