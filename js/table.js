@@ -120,11 +120,14 @@ $(function(){
 
 			$('.'+tableClass+' h1 strong').html( dayName );
 
+			var p2TotalTimeSpent = 0;
 			var theNewTable = '<table>';
 			$.each( arrayName, function(i, v){
 				theNewTable = theNewTable + "<tr><td class='p2timeWorkingOn'>"+v.notes+"</td><td class='p2WhichClient'>"+v.projectName+"</td><td class='p2ProjectStatus'>"+v.taskName+"</td><td class='p2TimeSpent'>"+v.time+" h</td><td class='p2EditThis'><a href='#'>EDIT</a></td><td class='p2DeleteThis'><a href='#'>X</a></td></tr>";
+				p2TotalTimeSpent = p2TotalTimeSpent + Number(v.time);
 			});
 			theNewTable + '</table>';
+			$('.'+tableClass+' h1 span').html( p2TotalTimeSpent );
 			$('.'+tableClass).append( theNewTable );
 
 		}
