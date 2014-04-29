@@ -8,7 +8,6 @@ $(document).ready(function() {
 
   addFillerSidebar();
   addPreviewButton();
-  parseTimeGrid();
 });
 
 function addFillerSidebar() {
@@ -36,7 +35,7 @@ function addFillerSidebar() {
 
 function addPreviewButton() {
   $('#timesheet_savebutton').insertBefore('#save_grid_submit');
-  $('<button id="p2_preview" class="btn-oa">Preview</button>').insertBefore('#save_grid_submit');
+  $('<button id="p2_preview" class="btn-oa">Preview</button>').insertAfter('#timesheet_savebutton');
 
   $('#p2_preview').click(function(e) {
     e.preventDefault();
@@ -47,43 +46,4 @@ function addPreviewButton() {
       $('#p2_preview').html('Preview');
     }
   });
-}
-
-function parseTimeGrid() {
-  var p2_projects = [];
-  $('.timesheetControlPopupCustomerProject option').each(function() {
-    if ($(this).text().length > 0) {
-      p2_projects[$(this).val()] = $(this).text();
-    }
-  });
-  console.log(p2_projects);
-
-  var p2_time = [];
-  $('.timesheetHours').each(function() {
-    time = $(this).find('.timesheetInputHour').val();
-    if (time.length < 1) {
-      return;
-    }
-    date = $(this).find('a').attr('data-additional-title');
-    date = date.substring(0, 2);
-    project = $(this).parents('tr').find('.timesheetControlPopupCustomerProject').val();
-    projectName = p2_projects[project];
-    task = $(this).parents('tr').find('.timesheetControlPopup').val();
-    taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text();
-    notesID = $(this).find('a').attr('data-additional-prefix');
-    notes = $('input[name=' + notesID + '_dialog_notes]').val();
-    p2_time.push(
-      {
-        time: time,
-        date: date,
-        project: project,
-        projectName: projectName,
-        task: task,
-        taskName: taskName,
-        notes: notes
-      }
-    );
-  });
-
-  console.log(p2_time)
 }
