@@ -1,6 +1,6 @@
 {
     "name": "__MSG_appName__",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {
@@ -26,17 +26,26 @@
     "content_scripts": [
         {
             "matches": [
-                "http://*/*",
-                "https://*/*"
+                "https://www.openair.com/timesheet.pl*"
             ],
             "css": [
                 "styles/main.css"
             ],
             "js": [
-                "scripts/contentscript.js"
+                "bower_components/jquery/dist/jquery.min.js",
+                "bower_components/angular/angular.min.js",
+                "scripts/markup.js",
+                "scripts/timeform.js",
+                "scripts/timetable.js"
             ],
             "run_at": "document_end",
             "all_frames": false
         }
+    ],
+    "web_accessible_resources": [
+        "bower_components/angular/angular.min.js",
+        "bower_components/angular/angular.min.js.map",
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/jquery/dist/jquery.min.map"
     ]
 }
