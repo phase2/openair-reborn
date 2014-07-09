@@ -9,7 +9,7 @@ $(document).ready(function() {
   $rowTwo.append('<div class="p2_form-input_group p2_which_client_wrapper"><label class="p2_form-label" for="p2_which_client">Which Client?</label><select id="p2_which_client" name="p2_which_client" class="p2_input-field" ></select></div>');
   $rowTwo.append('<div class="p2_form-input_group p2_which_task_wrapper"><label class="p2_form-label" for="p2_which_task">Which Task?</label><select id="p2_which_task" name="p2_which_task" class="p2_input-field"></select></div>');
   $rowTwo.append('<div class="p2_form-input_group p2_how_long_wrapper"><label class="p2_form-label" for="p2_how_long">How Long?</label><input type="text" id="p2_how_long" name"p2_how_long" class="p2_input-field" /></div>');
-  $rowTwo.append('<div class="p2_form-input_group p2_when_wrapper"><label class="p2_form-label" for="p2_when">When?</label><input type="text" id="p2_when" name"p2_when" class="p2_input-field" value="today" /></div>');
+  $rowTwo.append('<div class="p2_form-input_group p2_when_wrapper"><label class="p2_form-label" for="p2_when">When?</label><input type="text" id="p2_when" name"p2_when" class="p2_input-field" /></div>');
   $rowTwo.append('<div class="p2_form-submit_button"><input type="submit" class="p2_submit" value="Start" /></div>');
 
   $form
@@ -56,11 +56,39 @@ $(document).ready(function() {
 
 
   $('.p2_submit').click(function(e) {
+    e.preventDefault();
+    addTime();
+  });
+  // Thsi doesn't work.
+  $('.p2_input_field').keypress(function(e) {
+    e.preventDefault();
+    if (e.which == 13) {
+      addTime();
+      return false; 
+    }
+  });
+
+});
+
+function addTime() {
     notes = $('#p2_working_on').val();
-    client = $('#p2_which_client').val();
-    task = $('#p2_which_task').val();
+    client = $('#p2_which_client option:selected').text();
+    task = $('#p2_which_task option:selected').text();
     hours = $('#p2_how_long').val();
     day = $('#p2_when').val();
+    if (day.length < 1) {
+      var d = new Date();
+      var weekday = new Array(7);
+      weekday[0]=  "Sunday";
+      weekday[1] = "Monday";
+      weekday[2] = "Tuesday";
+      weekday[3] = "Wednesday";
+      weekday[4] = "Thursday";
+      weekday[5] = "Friday";
+      weekday[6] = "Saturday";
+
+      var day = weekday[d.getDay()];
+    }
     var timeEntry = {
       notes: notes,
       client: client,
@@ -69,18 +97,16 @@ $(document).ready(function() {
       day: day
     };
 
-    addTime(timeEntry);
-  });
+    newRow = "<tr><td class='p2timeWorkingOn'>"+notes+"</td><td class='p2WhichClient'>"+client+"</td><td class='p2ProjectStatus'>"+task+"</td><td class='p2TimeSpent'>"+hours+" h</td><td class='p2EditThis'><a href='#'>EDIT</a></td><td class='p2DeleteThis'><a href='#'>X</a></td></tr>";
 
-});
-
-function addTime(timeEntry) {
-  //date = $(this).find('a').attr('data-additional-title');
-  //date = date.substring(0, 2);
-  //project = $(this).parents('tr').find('.timesheetControlPopupCustomerProject').val();
-  //projectName = p2_projects[project];
-  //task = $(this).parents('tr').find('.timesheetControlPopup').val();
-  //taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text();
-  //notesID = $(this).find('a').attr('data-additional-prefix');
-  //notes = $('input[name=' + notesID + '_dialog_notes]').val();
+    var table = $('.new' + day + 'Table table');
+    table.prepend(newRow);
+    $('#p2_working_on').val('');
+    $('#p2_which_client').val('');
+    $('#p2_which_task').val('');
+    $('#p2_how_long').val('');
+    $('#p2_when').val('');
+    $('#p2_working_on').focus();
+    $("#p2_which_client").trigger("chosen:updated");
+    $("#p2_which_task").trigger("chosen:updated");
 }
