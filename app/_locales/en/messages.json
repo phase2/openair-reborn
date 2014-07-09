@@ -4,7 +4,7 @@
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "Time tracking for OpenAir with minimal teeth pulling",
+    "message": "OpenAir time tracking with almost no teeth pulling",
     "description": "The description of the application"
   }
 }

@@ -40,6 +40,10 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
+            compass: {
+                files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+                tasks: ['compass:chrome']
+            },
             gruntfile: {
                 files: ['Gruntfile.js']
             },
@@ -127,12 +131,45 @@ module.exports = function (grunt) {
             }
         },
 
+         // Compiles Sass to CSS and generates necessary files if requested
+        compass: {
+            options: {
+                sassDir: '<%= config.app %>/styles',
+                cssDir: '<%= config.dist %>/styles',
+                generatedImagesDir: '<%= config.dist %>/images/generated',
+                imagesDir: '<%= config.app %>/images',
+                javascriptsDir: '<%= config.app %>/scripts',
+                fontsDir: '<%= config.app %>/styles/fonts',
+                importPath: '<%= config.app %>/bower_components',
+                httpImagesPath: '/images',
+                httpGeneratedImagesPath: '/images/generated',
+                httpFontsPath: '/styles/fonts',
+                relativeAssets: false,
+                assetCacheBuster: false
+            },
+            chrome: {
+                options: {
+                    cssDir: '<%= config.app %>/styles',
+                    generatedImagesDir: '<%= config.app %>/images/generated',
+                    debugInfo: true
+                }
+            },
+            dist: {
+            },
+            test: {
+            }
+        },
+
         // Automatically inject Bower components into the HTML file
         bowerInstall: {
             app: {
                 src: [ 
                      '<%= config.app %>/*.html'
                 ]
+            },
+            sass: {
+                src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+                ignorePath: '<%= config.app %>/bower_components/'
             }
         },
 
@@ -250,12 +287,15 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up build process
         concurrent: {
             chrome: [
+                'compass:chrome',
             ],
             dist: [
+                'compass:dist',
                 'imagemin',
                 'svgmin'
             ],
             test: [
+                'compass:test',
             ]
         },
 
