@@ -3,8 +3,7 @@
 }
 
 #p2_content {
-  width: 70%;
-  float: left;
+  width: 100%;
   padding-left: 4em;
   margin-top: 2em;
 
@@ -35,7 +34,7 @@
     line-height: 22px;
   }
 
-  .p2_form-input_group {
+  .p2_form-input {
     padding-right: 1em;
     float: left;
     box-sizing: border-box;
@@ -63,42 +62,6 @@
     float: left !important;
   }
 }
-
-#p2_sidebar {
-  width: 20%;
-  float: right;
-  padding-right: 4em;
-  margin-top: 2em;
-
-  h2 {
-    font-weight: bold;
-    color: white;
-    background: black;
-    padding: 0.5em 1em;
-  }
-
-  .total {
-    font-weight: bold;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  & > div {
-    background-color: rgba(245, 241, 238, 1);
-    margin-top: 0.5em;
-  }
-
-  .sidebar-inner {
-    padding: 1em;
-  }
-
-  .chart img {
-    width: 100%;
-  }
-}
-
 
 .p2TimeTableWrapper {
   h1 {

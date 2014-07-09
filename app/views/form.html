@@ -1,0 +1,30 @@
+<div class="p2_form-wrapper">
+
+    <div class="p2_form-row">
+        <label>What are you working on?</label>
+        <input type="text" ng-model="description" id="p2_working_on" />
+    </div>
+
+    <div class="p2_form-row">
+        <div class="p2_form-input">
+            <label>Which Client?</label>
+            <select ng-model="client" id="p2_which_client"></select>
+        </div>
+        <div class="p2_form-input">
+            <label>Which Task?</label>
+            <select ng-model="task" id="p2_which_task"></select>
+        </div>
+        <div class="p2_form-input">
+            <label>How Long?</label>
+            <input type="text" ng-model="duration" id="p2_how_long" />
+        </div>
+        <div class="p2_form-input">
+            <label>When?</label>
+            <input type="text" ng-model="when" id="p2_when" />
+        </div>
+        <div class="p2_form-input">
+            <input type="submit" ng-click="addTime" class="p2_submit" value="Start" />
+        </div>
+    </div>
+
+</div>
