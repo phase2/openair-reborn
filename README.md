@@ -5,6 +5,12 @@ A Chrome extension to improve (fix) the OpenAir time entry grid interface
 
 Sponsored by [Phase2 Technology](http://phase2technology.com).
 
+### Status
+
+This is about 80% complete (for some definition of "complete") but the last 20% includes the crucial step of making the added time actually populate in the OpenAir time grid, so currently it doesn't accomplish anything.
+
+Time is booked in mid-July 2014 to finish up.
+
 ### How to help out
 
 1. Clone this repo.
