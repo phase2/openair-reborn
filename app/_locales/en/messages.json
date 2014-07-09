@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "OpenAir Reborn",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Time tracking for OpenAir with minimal teeth pulling",
+    "description": "The description of the application"
+  }
+}
