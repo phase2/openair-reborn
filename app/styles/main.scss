@@ -1,3 +1,13 @@
+$lightblue: #99cee7;
+$lightgray: #f4f2ed;
+
+
+// Miscellaneous OpenAir fixes start here
+.timesheet td.formButtonBar #save_grid_submit {
+  margin-right: 10px !important;
+}
+
+// Styles for OpenAir Reborn start here
 #timesheet_grid, .timesheetPinned, #timesheet_header_lower {
   display: none;
 }
@@ -6,145 +16,46 @@
   width: 100%;
   padding-left: 4em;
   margin-top: 2em;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
 
   .p2_form-wrapper {
-    display: block;
-    width: 100%;
-    padding: 1.5em 0px 0.75em 2em;
-    background-color: #c7ddeb;
+    padding: 1.5em;
+    width: 95%;
+    background-color: $lightgray;
     clear: both;
     overflow: visible;
-    box-sizing: border-box;
+
+    .p2_row div {
+      width: 19%;
+      display: inline-block;
+      margin-top: 20px;
+
+      input {
+        width: 90%;
+      }
+    }
+
+    select {
+      display: block;
+    }
+
+    label {
+      font-size: 16px;
+    }
   }
 
-  .p2_form-row {
+  input {
+    -webkit-box-shadow: 0 1px 4px rgba(128,128,128,.4);
+    -moz-box-shadow: 0 1px 4px rgba(128,128,128,.4);
+    box-shadow: 0 1px 4px rgba(128,128,128,.4);
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 16px;
     width: 100%;
-    padding: 0 4em 1em 0;
-    box-sizing: border-box;
-  }
-
-  .p2_form-label {
-    display: block;
-    font-size: 18px;
-    font-weight: 900;
-  }
-
-  .p2_input-field {
-    width: 98%;
-    line-height: 22px;
-  }
-
-  .p2_form-input {
-    padding-right: 1em;
-    float: left;
-    box-sizing: border-box;
-    padding-top: 1em;
-  }
-
-  .p2_one-whole { width: 100%; padding-top: 0; }
-
-  .p2_which_client_wrapper { width: 25%; }
-  .p2_which_task_wrapper { width: 25%; }
-  .p2_when_wrapper { width: 15%; }
-  .p2_how_long_wrapper { width: 15%; }
-
-  .p2_form-submit_button {
-    display: inline-block;
-    margin-top: 2.6em;
-  }
-
-  .oa3_ui input[type="submit"].p2_submit {
-    padding: 1px 1.5em;
-    font-size: 18px !important;
-    font-weight: 100 !important;
-    line-height: 22px !important;
-    letter-spacing: 1px;
-    float: left !important;
-  }
-}
-
-.p2TimeTableWrapper {
-  h1 {
-    font-weight: normal !important;
-    margin: 30px 0 8px 0 !important;
-  }
-
-  table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: separate;
-  }
-
-  table tr {
-    opacity: 0.60;
-  }
-
-  table tr:hover {
-    opacity: 1;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-    cursor: pointer;
-  }
-
-  table tr td {
-    border-bottom: 2px solid #f5f2ed;
-    padding: 7px 0;
-  }
-
-  .p2timeWorkingOn {
-    font-weight: bold;
-    width: 45%;
-    padding-right: 50px;
-  }
-
-  .p2WhichClient {
-    width: 25%;
-    padding-right: 15px;
-  }
-
-  .p2ProjectStatus {
-    width: 10%;
-  }
-
-  .p2TimeSpent {
-    font-weight: bold;
-    width: 5%;
-    text-align: center;
-  }
-
-  .p2EditThis {
-    width: 5%;
-    text-align: center;
-  }
-
-  .p2EditThis a:link, .p2EditThis a:visited {
-    text-decoration: none;
-    color: #a8bd35;
-  }
-
-  .p2EditThis a:hover {
-    font-weight: bold;
-    zoom: 125%;
-  }
-
-  .p2DeleteThis {
-    width: 5%;
-    text-align: center;
-  }
-
-  .p2DeleteThis a:link, .p2DeleteThis a:visited {
-    text-decoration: none;
-    color: #000;
-  }
-
-  .p2DeleteThis a:hover {
-    font-weight: bold;
-    zoom: 125%;
-  }
-
-  &:last-child {
-    margin-bottom: 75px;
   }
 }
