@@ -1,7 +1,6 @@
 $lightblue: #99cee7;
 $lightgray: #f4f2ed;
 
-
 // Miscellaneous OpenAir fixes start here
 .timesheet td.formButtonBar #save_grid_submit {
   margin-right: 10px !important;
@@ -29,8 +28,8 @@ $lightgray: #f4f2ed;
     clear: both;
     overflow: visible;
 
-    .p2_row div {
-      width: 19%;
+    .p2_row div.p2_input-wrapper {
+      width: 34%;
       display: inline-block;
       margin-top: 20px;
       input {
@@ -42,11 +41,27 @@ $lightgray: #f4f2ed;
       label {
         font-size: 16px;
       }
+      &.p2-text {
+        width: 10%;
+      }
+      .p2-submit {
+        padding: 15px;
+      }
+    }
+
+    .chosen-container {
+      width: 95% !important;
+      height: 40px;
+      .chosen-single {
+        padding: 8px 15px;
+        font-size: 16px;
+        height: 40px;
+      }
     }
 
   }
 
-  input {
+  .p2-input {
     -webkit-box-shadow: 0 1px 4px rgba(128,128,128,.4);
     -moz-box-shadow: 0 1px 4px rgba(128,128,128,.4);
     box-shadow: 0 1px 4px rgba(128,128,128,.4);

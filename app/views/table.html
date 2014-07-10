@@ -1,1 +1,19 @@
-<h1>Table goes here</h1>
+<div ng-repeat="day in weekdays">
+    <div>
+        <h2>{{day.name}}</h2>
+        <table>
+            <tr>
+                <th>Project</th>
+                <th>Task</th>
+                <th>Notes</th>
+                <th>Time</th>
+            </tr>
+            <tr ng-repeat="entry in timeEntries[day.code]">
+                <td class="p2-project">{{entry.projectName}}</td>
+                <td class="p2-task">{{entry.taskName}}</td>
+                <td class="p2-notes">{{entry.notes}}</td>
+                <td class="p2-time">{{entry.time}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

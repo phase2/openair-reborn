@@ -1,26 +1,26 @@
 <div class="p2_form-wrapper">
 
-    <input placeholder="What are you working on?" type="text" ng-model="description" class="p2_working_on" />
+    <input placeholder="What are you working on?" type="text" ng-model="description" class="p2-input" />
 
     <div class="p2_row">
-        <div>
-            <select chosen ng-model="project" ng-options="k as v for (k, v) in projects" class="p2_which_client">
+        <div class="p2_input-wrapper">
+            <select chosen ng-model="$parent.project" ng-change="updateTasks()" ng-options="k as v for (k, v) in projects" class="p2-project">
                 <option value="">Select a project...</option>
             </select>
         </div>
-        <div>
-            <!--<select chosen ng-model="task" ng-options="tasks" class="p2_which_task">-->
-                <!--<option value="">Select a task...</option>-->
-            <!--</select>-->
+        <div class="p2_input-wrapper">
+            <select chosen ng-model="task" ng-options="k as v for (k, v) in tasks" class="p2-task">
+                <option value="">Select a task...</option>
+            </select>
         </div>
-        <div>
-            <input placeholder="1h" type="text" ng-model="duration" class="p2_how_long" />
+        <div class="p2_input-wrapper p2-text">
+            <input placeholder="1h" type="text" ng-model="duration" class="p2-input" />
         </div>
-        <div>
-            <input placeholder="Today" type="text" ng-model="when" class="p2_when" />
+        <div class="p2_input-wrapper p2-text">
+            <input placeholder="Today" type="text" ng-model="when" class="p2-input" />
         </div>
-        <div>
-            <input type="submit" ng-click="addTime" class="p2_submit" value="Save" />
+        <div class="p2_input-wrapper p2-text">
+            <input type="submit" ng-click="addTime" class="p2-submit" value="Add" />
         </div>
     </div>
 
