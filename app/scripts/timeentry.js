@@ -13,4 +13,9 @@ app.controller('timeEntryController', ['$scope', function($scope) {
             $scope.projects[$(this).val()] = $(this).text();
         }
     });
+
+    $scope.$on('$includeContentLoaded', function(event) {
+        $('#p2_content select').chosen();
+    });
+
 }]);

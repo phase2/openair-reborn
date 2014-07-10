@@ -33,19 +33,17 @@ $lightgray: #f4f2ed;
       width: 19%;
       display: inline-block;
       margin-top: 20px;
-
       input {
         width: 90%;
       }
+      select {
+        display: block;
+      }
+      label {
+        font-size: 16px;
+      }
     }
 
-    select {
-      display: block;
-    }
-
-    label {
-      font-size: 16px;
-    }
   }
 
   input {

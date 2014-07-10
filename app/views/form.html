@@ -4,14 +4,14 @@
 
     <div class="p2_row">
         <div>
-            <select ng-model="project" ng-options="k as v for (k, v) in projects" class="p2_which_client">
+            <select chosen ng-model="project" ng-options="k as v for (k, v) in projects" class="p2_which_client">
                 <option value="">Select a project...</option>
             </select>
         </div>
         <div>
-            <select ng-model="task" ng-options="tasks" class="p2_which_task">
-                <option value="">Select a task...</option>
-            </select>
+            <!--<select chosen ng-model="task" ng-options="tasks" class="p2_which_task">-->
+                <!--<option value="">Select a task...</option>-->
+            <!--</select>-->
         </div>
         <div>
             <input placeholder="1h" type="text" ng-model="duration" class="p2_how_long" />
