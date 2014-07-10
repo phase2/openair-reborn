@@ -83,6 +83,12 @@ $lightgray: #f4f2ed;
         font-size: 16px;
         margin-top: -3px;
       }
+      .search-choice span {
+        text-overflow: ellipsis;
+        max-width: 50px;
+        display: inline-block;
+        overflow: hidden;
+      }
     }
     .chosen-with-drop .chosen-single {
       border: 1px solid rgb(170, 170, 170) !important;
