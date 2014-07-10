@@ -137,23 +137,27 @@ app.controller('timeEntryController', ['$scope', function($scope) {
     $scope.addTime = function(e) {
         e.preventDefault();
 
-        if ($scope.when === "" || typeof $scope.when === "undefined") {
-            $scope.when = $scope.getDay();
+        if ($scope.when === "" || typeof $scope.when === "undefined" || $scope.when.length === 0) {
+            $scope.when = [$scope.getDay()];
         }
 
-        if (!$scope.timeEntries[$scope.when]) {
-            $scope.timeEntries[$scope.when] = [];
-        }
-        var timeEntry = {
-            time: $scope.time,
-            project: $scope.project,
-            projectName: $scope.fetchProjects()[$scope.project],
-            task: $scope.task,
-            taskName: $scope.fetchTasks($scope.project)[$scope.task],
-            notes: $scope.notes
-        };
+        angular.forEach($scope.when, function(day, key) {
 
-        $scope.timeEntries[$scope.when].push(timeEntry);
+            var timeEntry = {
+                time: $scope.time,
+                project: $scope.project,
+                projectName: $scope.fetchProjects()[$scope.project],
+                task: $scope.task,
+                taskName: $scope.fetchTasks($scope.project)[$scope.task],
+                notes: $scope.notes
+            };
+
+            if (!$scope.timeEntries[day]) {
+                $scope.timeEntries[day] = [];
+            }
+            $scope.timeEntries[day].push(timeEntry);
+        });
+
 
         // Reset the description since we can be sure that won't be repeated
         // on the next entry. The other variables can stay in case they will be
@@ -188,15 +192,17 @@ app.controller('timeEntryController', ['$scope', function($scope) {
     // Initialize the time entries by grabbing them out of the OpenAir grid.
     $scope.timeEntries = $scope.parseTimesheet();
 
+    $scope.when = [$scope.getDay()];
+
     // Days of the week, to match code to day and cycle through in the view.
     $scope.weekdays = [
-        {code: "mo", name: 'Monday'},
-        {code: "tu", name: 'Tuesday'},
-        {code: "we", name: 'Wednesday'},
-        {code: "th", name: 'Thursday'},
-        {code: "fr", name: 'Friday'},
-        {code: "sa", name: 'Saturday'},
-        {code: "su", name: 'Sunday'}
+        {code: "mo", name: 'Monday', shortName: 'Mo'},
+        {code: "tu", name: 'Tuesday', shortName: 'Tu'},
+        {code: "we", name: 'Wednesday', shortName: 'We'},
+        {code: "th", name: 'Thursday', shortName: 'Th'},
+        {code: "fr", name: 'Friday', shortName: 'Fr'},
+        {code: "sa", name: 'Saturday', shortName: 'Sa'},
+        {code: "su", name: 'Sunday', shortName: 'Su'}
     ];
 
     /**

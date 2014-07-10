@@ -16,9 +16,8 @@
                 <option value="">Select a task...</option>
             </select>
         </div>
-        <div class="p2-input-wrapper p2-text">
-            <select chosen ng-model="$parent.when" ng-options="v.code as v.name for (k, v) in weekdays" class="p2-when">
-                <option value="">Today</option>
+        <div class="p2-input-wrapper">
+            <select chosen data-placeholder="Date" multiple ng-model="$parent.when" ng-options="v.code as v.name for (k, v) in weekdays" class="p2-when">
             </select>
         </div>
         <div class="p2-input-wrapper p2-text">
