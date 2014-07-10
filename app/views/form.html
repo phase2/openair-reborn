@@ -1,26 +1,28 @@
-<div class="p2_form-wrapper">
+<div class="p2-form-wrapper">
 
-    <input placeholder="What are you working on?" type="text" ng-model="description" class="p2-input" />
+    <input placeholder="What are you working on?" type="text" ng-model="$parent.notes" class="p2-input p2-notes" />
 
-    <div class="p2_row">
-        <div class="p2_input-wrapper">
+    <div class="p2-row">
+        <div class="p2-input-wrapper p2-text">
+            <input placeholder="Hours" type="text" ng-model="$parent.time" class="p2-input" />
+        </div>
+        <div class="p2-input-wrapper">
             <select chosen ng-model="$parent.project" ng-change="updateTasks()" ng-options="k as v for (k, v) in projects" class="p2-project">
                 <option value="">Select a project...</option>
             </select>
         </div>
-        <div class="p2_input-wrapper">
-            <select chosen ng-model="task" ng-options="k as v for (k, v) in tasks" class="p2-task">
+        <div class="p2-input-wrapper">
+            <select chosen ng-model="$parent.task" ng-options="k as v for (k, v) in tasks" class="p2-task">
                 <option value="">Select a task...</option>
             </select>
         </div>
-        <div class="p2_input-wrapper p2-text">
-            <input placeholder="1h" type="text" ng-model="duration" class="p2-input" />
+        <div class="p2-input-wrapper p2-text">
+            <select chosen ng-model="$parent.when" ng-options="v.code as v.name for (k, v) in weekdays" class="p2-when">
+                <option value="">Today</option>
+            </select>
         </div>
-        <div class="p2_input-wrapper p2-text">
-            <input placeholder="Today" type="text" ng-model="when" class="p2-input" />
-        </div>
-        <div class="p2_input-wrapper p2-text">
-            <input type="submit" ng-click="addTime" class="p2-submit" value="Add" />
+        <div class="p2-input-wrapper p2-text">
+            <input type="submit" ng-click="addTime($event)" class="p2-submit" value="Add" />
         </div>
     </div>
 

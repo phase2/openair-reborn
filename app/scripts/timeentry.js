@@ -57,7 +57,8 @@ app.controller('timeEntryController', ['$scope', function($scope) {
         // so we end up with this monstrosity.
         $('.timesheetControlPopupCustomerProject').eq(-2).parent().next().find('option').each(function () {
             if ($(this).text().length > 0 && $(this).val() !== "0") {
-                tasks[$(this).val()] = $(this).text();
+                var label = $(this).text().split(': ')[1];
+                tasks[$(this).val()] = label;
             }
         });
         return tasks;
@@ -91,22 +92,20 @@ app.controller('timeEntryController', ['$scope', function($scope) {
             var project = $(this).parents('tr').find('.timesheetControlPopupCustomerProject').val();
             var projectName = $scope.projects[project];
             var task = $(this).parents('tr').find('.timesheetControlPopup').val();
-            var taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text();
+            var taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text().split(': ')[1];
             var notesID = $(this).find('a').attr('data-additional-prefix');
             var notes = $scope.findNotes(notesID);
             if (!timeEntries[date]) {
                 timeEntries[date] = [];
             }
-            timeEntries[date].push(
-                {
-                    time: time,
-                    project: project,
-                    projectName: projectName,
-                    task: task,
-                    taskName: taskName,
-                    notes: notes
-                }
-            );
+            timeEntries[date].push({
+                time: time,
+                project: project,
+                projectName: projectName,
+                task: task,
+                taskName: taskName,
+                notes: notes
+            });
         });
         return timeEntries;
     };
@@ -135,12 +134,49 @@ app.controller('timeEntryController', ['$scope', function($scope) {
     /**
      * Adds time to the list of time entries.
      */
-    $scope.addTime = function() {
+    $scope.addTime = function(e) {
+        e.preventDefault();
+
+        if ($scope.when === "" || typeof $scope.when === "undefined") {
+            $scope.when = $scope.getDay();
+        }
+
+        if (!$scope.timeEntries[$scope.when]) {
+            $scope.timeEntries[$scope.when] = [];
+        }
+        var timeEntry = {
+            time: $scope.time,
+            project: $scope.project,
+            projectName: $scope.fetchProjects()[$scope.project],
+            task: $scope.task,
+            taskName: $scope.fetchTasks($scope.project)[$scope.task],
+            notes: $scope.notes
+        };
+
+        $scope.timeEntries[$scope.when].push(timeEntry);
 
         // Reset the description since we can be sure that won't be repeated
         // on the next entry. The other variables can stay in case they will be
         // repeated, to save repetitive entry.
-        $scope.description = '';
+        $scope.notes = '';
+        angular.element('.p2-notes').trigger('focus');
+    };
+
+    /**
+     * Return the 2 letter code of the current date.
+     * @returns {*}
+     */
+    $scope.getDay = function() {
+        var date = new Date();
+        var weekday = new Array(7);
+        weekday[0]=  "su";
+        weekday[1] = "mo";
+        weekday[2] = "tu";
+        weekday[3] = "we";
+        weekday[4] = "th";
+        weekday[5] = "fr";
+        weekday[6] = "sa";
+        return weekday[date.getDay()];
     }
 
     // Initialize the list of projects on page load.
@@ -152,7 +188,7 @@ app.controller('timeEntryController', ['$scope', function($scope) {
     // Initialize the time entries by grabbing them out of the OpenAir grid.
     $scope.timeEntries = $scope.parseTimesheet();
 
-    // Days of the week, to match code to day.
+    // Days of the week, to match code to day and cycle through in the view.
     $scope.weekdays = [
         {code: "mo", name: 'Monday'},
         {code: "tu", name: 'Tuesday'},
@@ -161,7 +197,27 @@ app.controller('timeEntryController', ['$scope', function($scope) {
         {code: "fr", name: 'Friday'},
         {code: "sa", name: 'Saturday'},
         {code: "su", name: 'Sunday'}
-    ]
+    ];
 
+    /**
+     * Adds an "Enter" key listener to submit the form on Enter press
+     * if the fields have been filled out.
+     */
+    document.addEventListener("keydown", function(e) {
+        var key = e.which || e.keyCode;
+        if (key === 13) {
+
+            // Enter key was pressed! Can we submit the form?
+            if ($scope.notes && $scope.project && $scope.task && $scope.time) {
+
+                // Woohoo! We can add some time!
+                $scope.addTime(e);
+
+                // This .$apply() is needed when submitting the form in this
+                // fashion, otherwise it re-renders fine without it.
+                $scope.$apply();
+            }
+        }
+    });
 
 }]);
