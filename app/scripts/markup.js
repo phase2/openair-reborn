@@ -1,6 +1,9 @@
 'use strict';
 /*global $:false */
+/*global angular:false */
+/*exported app*/
 
+var app = angular.module('OpenAirReborn',['localytics.directives']);
 
 function addInitialMarkup() {
     var $timesheet = $('#timesheet_grid');
@@ -9,7 +12,7 @@ function addInitialMarkup() {
     }
 
     var $content = $('<div id="p2_content" ng-app="OpenAirReborn" ng-csp></div>');
-    var $app = $('<div ng-controller="timeEntryController" class="oa_reborn_wrapper"></div>');
+    var $app = $('<div ng-controller="TimeEntryController" class="oa_reborn_wrapper"></div>');
 
     // Add the partials
     var url = chrome.extension.getURL('views/form.html');

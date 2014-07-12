@@ -37,8 +37,9 @@
                 "bower_components/jquery/dist/jquery.js",
                 "bower_components/angular/angular.js",
                 "bower_components/chosen/chosen.jquery.js",
-                "scripts/timeentry.js",
                 "scripts/markup.js",
+                "scripts/timeentry.js",
+                "scripts/openair.js",
                 "bower_components/angular-chosen-localytics/chosen.js"
             ],
             "run_at": "document_end",
