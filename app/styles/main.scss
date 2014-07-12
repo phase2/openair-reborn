@@ -6,6 +6,10 @@ $lightgray: #f4f2ed;
   margin-right: 10px !important;
 }
 
+.timesheet td.formButtonBarOnFullScreen {
+  padding-right: 125px;
+}
+
 // Styles for OpenAir Reborn start here
 #timesheet_grid, .timesheetPinned, #timesheet_header_lower {
   display: none;
@@ -55,8 +59,8 @@ $lightgray: #f4f2ed;
     }
 
     .p2-row div.p2-input-wrapper {
-      width: 25%;
-      display: inline-block;
+      width: 26%;
+      display: inline-block;j game
       margin-top: 20px;
       input {
         width: 90%;
@@ -89,6 +93,14 @@ $lightgray: #f4f2ed;
         display: inline-block;
         overflow: hidden;
       }
+      .chosen-search input {
+        width: 100% !important;
+        margin-bottom: 10px;
+      }
+      .chosen-results li.highlighted {
+        color: black !important;
+        background: $lightblue !important;
+      }
     }
     .chosen-with-drop .chosen-single {
       border: 1px solid rgb(170, 170, 170) !important;
@@ -98,18 +110,24 @@ $lightgray: #f4f2ed;
 
   .p2-table-wrapper {
     margin-top:20px;
+    font-size: 14px;
     h2 {
-      margin-top: 20px;
+      margin: 40px 0 20px;
       font-weight: normal;
-      color: #aaa;
+      color: #777;
       font-size: 22px;
     }
     table {
       width: 95%;
     }
     td, th {
-      padding: 5px;
+      padding: 10px;
+      border: none;
+      outline: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
       text-align: left;
+      font-size: 14px;
       &:first-child {
         padding-left: 0;
       }
@@ -117,10 +135,70 @@ $lightgray: #f4f2ed;
         padding-right: 0;
       }
     }
+    .p2-project {
+      width: 30%;
+      color: black;
+      span {
+        color: #777;
+        font-size: 12px;
+      }
+    }
+    .p2-notes {
+      width: 55%;
+      color: #777;
+      font-style: italic;
+    }
+    .p2-time {
+      width: 5%;
+      font-weight: bold;
+    }
+    .p2-edit {
+      width: 10%;
+      text-align: right;
+      opacity: 0.1;
+      a {
+        display: inline-block;
+        margin-right: 10px;
+        width: 16px;
+        height: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-indent: 100%;
+        &.p2-edit-link {
+          background: transparent url(http://i.imgur.com/FNOH9ab.png);
+        }
+        &.p2-delete-link {
+          background: transparent url(http://i.imgur.com/2onIns8.png);
+        }
+      }
+    }
+  }
+  tr {
+    -webkit-animation: blue-fade 0.5s ease-in 1;
+    animation: blue-fade 0.5s ease-in 1;
+    &:hover {
+      background: $lightgray;
+      .p2-edit {
+        opacity: 1;
+      }
+    }
   }
 
+
+  // Relative bckground image doesn't work correctly in a Chrome extension,
+  // and using the __MSG__ placeholder trick didn't either. Sue me.
   .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
     background: url('http://i.imgur.com/C0JrorS.png') -42px 1px no-repeat;
   }
 
+}
+
+@-webkit-keyframes blue-fade {
+  0% {background: $lightblue;}
+  100% {background: none;}
+}
+
+@keyframes blue-fade {
+  0% {background: $lightblue;}
+  100% {background: none;}
 }

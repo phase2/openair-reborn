@@ -7,13 +7,11 @@
             <input placeholder="Hours" type="text" ng-model="$parent.time" class="p2-input" />
         </div>
         <div class="p2-input-wrapper">
-            <select chosen ng-model="$parent.project" ng-change="updateTasks()" ng-options="k as v for (k, v) in projects" class="p2-project">
-                <option value="">Select a project...</option>
+            <select chosen data-placeholder="Select a project..." ng-model="$parent.project" ng-change="updateTasks()" ng-options="k as v for (k, v) in projects" class="p2-project">
             </select>
         </div>
         <div class="p2-input-wrapper">
-            <select chosen ng-model="$parent.task" ng-options="k as v for (k, v) in tasks" class="p2-task">
-                <option value="">Select a task...</option>
+            <select chosen data-placeholder="Select a task..." ng-model="$parent.task" ng-options="k as v for (k, v) in tasks" class="p2-task">
             </select>
         </div>
         <div class="p2-input-wrapper">

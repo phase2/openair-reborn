@@ -1,19 +1,16 @@
 <div class="p2-table-wrapper">
-    <div ng-repeat="day in weekdays">
+    <div ng-repeat="day in reverseWeekdays">
         <div ng-show="timeEntries[day.code]">
-            <h2>{{day.name}}</h2>
-            <table>
-                <tr>
-                    <th>Project</th>
-                    <th>Task</th>
-                    <th>Notes</th>
-                    <th>Time</th>
-                </tr>
+            <h2>{{day.name}} ({{sumTime(timeEntries[day.code])}} hours)</h2>
+            <table cellpadding="0" cellspacing="0">
                 <tr ng-repeat="entry in timeEntries[day.code] | orderBy : 'projectName'">
-                    <td class="p2-project">{{entry.projectName}}</td>
-                    <td class="p2-task">{{entry.taskName}}</td>
+                    <td class="p2-time">{{entry.time}} hr</td>
+                    <td class="p2-project">{{entry.projectName}} <span>({{entry.taskName}})</span></td>
                     <td class="p2-notes">{{entry.notes}}</td>
-                    <td class="p2-time">{{entry.time}}</td>
+                    <td class="p2-edit">
+                        <a href="#" class="p2-edit-link" ng-click="editTime(entry, day.code)">Edit</a>
+                        <a href="#" class="p2-delete-link" ng-click="deleteTime(entry, day.code)">Delete</a>
+                    </td>
                 </tr>
             </table>
         </div>

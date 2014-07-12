@@ -1,4 +1,6 @@
 'use strict';
+/*global angular:false */
+/*global $:false */
 
 var app = angular.module('OpenAirReborn',['localytics.directives']);
 
@@ -90,7 +92,7 @@ app.controller('timeEntryController', ['$scope', function($scope) {
             }
             var date = $(this).find('a').attr('data-additional-title').substring(0, 2).toLowerCase();
             var project = $(this).parents('tr').find('.timesheetControlPopupCustomerProject').val();
-            var projectName = $scope.projects[project];
+            var projectName = $scope.projects[project].split(' : ')[1];
             var task = $(this).parents('tr').find('.timesheetControlPopup').val();
             var taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text().split(': ')[1];
             var notesID = $(this).find('a').attr('data-additional-prefix');
@@ -121,11 +123,11 @@ app.controller('timeEntryController', ['$scope', function($scope) {
     $scope.findNotes = function(notesID) {
         var timeData = JSON.parse($('#oa_model_timesheet').html());
         var notes = "test";
-        angular.forEach(timeData.rows, function(row, key) {
-            angular.forEach(row.fields, function(field, key) {
+        angular.forEach(timeData.rows, function(row) {
+            angular.forEach(row.fields, function(field) {
                 if (field.id === notesID) {
                     notes = field.details.data.notes;
-                };
+                }
             });
         });
         return notes;
@@ -141,7 +143,7 @@ app.controller('timeEntryController', ['$scope', function($scope) {
             $scope.when = [$scope.getDay()];
         }
 
-        angular.forEach($scope.when, function(day, key) {
+        angular.forEach($scope.when, function(day) {
 
             var timeEntry = {
                 time: $scope.time,
@@ -158,7 +160,6 @@ app.controller('timeEntryController', ['$scope', function($scope) {
             $scope.timeEntries[day].push(timeEntry);
         });
 
-
         // Reset the description since we can be sure that won't be repeated
         // on the next entry. The other variables can stay in case they will be
         // repeated, to save repetitive entry.
@@ -167,8 +168,55 @@ app.controller('timeEntryController', ['$scope', function($scope) {
     };
 
     /**
+     * Deletes a specific time entry from a specific day and populates the form
+     * with its info for editing.
+     * @param {Object} entry
+     * @param {String} day
+     */
+    $scope.editTime = function(entry, day) {
+        $scope.notes = entry.notes;
+        $scope.project = entry.project;
+        $scope.tasks = $scope.fetchTasks(entry.project);
+        $scope.task = entry.task;
+        $scope.time = entry.time;
+        $scope.when = [day];
+        $scope.deleteTime(entry, day);
+    };
+
+    /**
+     * Deletes a specific time entry on a specific day.
+     * @param {Object} entry
+     * @param {String} day
+     */
+    $scope.deleteTime = function(entry, day) {
+        var entries = $scope.timeEntries[day];
+        $scope.timeEntries[day] = entries.filter(function(element) {
+            if (element.time === entry.time &&
+                element.project === entry.project &&
+                element.task === entry.task &&
+                element.notes === entry.notes) {
+                return false;
+            }
+            return true;
+        });
+    };
+
+    /**
+     * Adds up all the time for a list of time entries.
+     * @param {Array} timeEntries
+     * @returns {number} sum
+     */
+    $scope.sumTime = function(timeEntries) {
+        var sum = 0;
+        angular.forEach(timeEntries, function(entry) {
+            sum += parseFloat(entry.time);
+        });
+        return sum;
+    };
+
+    /**
      * Return the 2 letter code of the current date.
-     * @returns {*}
+     * @returns {String}
      */
     $scope.getDay = function() {
         var date = new Date();
@@ -181,7 +229,7 @@ app.controller('timeEntryController', ['$scope', function($scope) {
         weekday[5] = "fr";
         weekday[6] = "sa";
         return weekday[date.getDay()];
-    }
+    };
 
     // Initialize the list of projects on page load.
     $scope.projects = $scope.fetchProjects();
@@ -192,6 +240,7 @@ app.controller('timeEntryController', ['$scope', function($scope) {
     // Initialize the time entries by grabbing them out of the OpenAir grid.
     $scope.timeEntries = $scope.parseTimesheet();
 
+    // Default the "Day" field to the current day.
     $scope.when = [$scope.getDay()];
 
     // Days of the week, to match code to day and cycle through in the view.
@@ -205,9 +254,14 @@ app.controller('timeEntryController', ['$scope', function($scope) {
         {code: "su", name: 'Sunday', shortName: 'Su'}
     ];
 
+    // The time table is listed in reverse order.
+    // @TODO: Use a filter instead.
+    $scope.reverseWeekdays = $scope.weekdays.reverse();
+
     /**
      * Adds an "Enter" key listener to submit the form on Enter press
      * if the fields have been filled out.
+     * @TODO: Use a directive instead.
      */
     document.addEventListener("keydown", function(e) {
         var key = e.which || e.keyCode;

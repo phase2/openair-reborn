@@ -4,8 +4,9 @@
 
 function addInitialMarkup() {
     var $timesheet = $('#timesheet_grid');
-    if ($timesheet.length < 1)
+    if ($timesheet.length < 1) {
         return;
+    }
 
     var $content = $('<div id="p2_content" ng-app="OpenAirReborn" ng-csp></div>');
     var $app = $('<div ng-controller="timeEntryController" class="oa_reborn_wrapper"></div>');
