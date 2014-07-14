@@ -8,10 +8,12 @@
         </div>
         <div class="p2-input-wrapper">
             <select chosen data-placeholder="Select a project..." ng-model="$parent.project" ng-change="updateTasks()" ng-options="k as v for (k, v) in projects" class="p2-project">
+                <option></option> <!-- necessary due to https://github.com/localytics/angular-chosen/issues/8 -->
             </select>
         </div>
         <div class="p2-input-wrapper">
             <select chosen data-placeholder="Select a task..." ng-model="$parent.task" ng-options="k as v for (k, v) in tasks" class="p2-task">
+                <option></option> <!-- necessary due to https://github.com/localytics/angular-chosen/issues/8 -->
             </select>
         </div>
         <div class="p2-input-wrapper">
