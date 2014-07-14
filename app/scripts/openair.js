@@ -82,8 +82,12 @@ app.service('OpenAirService', function() {
             // so we end up with this monstrosity.
             var $taskoptions = $('.timesheetControlPopupCustomerProject').eq(-2).parent().next().find('option');
         }
+
+        // Now that we have our "Tasks" dropdown, let's loop through the options
+        // to build our formatted "tasks" object and return it.
         $taskoptions.each(function () {
             if ($(this).text().length > 0 && $(this).val() !== "0") {
+                // Let's use a .split() to remove the useless number from the task's label.
                 var label = $(this).text().split(': ')[1];
                 tasks[$(this).val()] = label;
             }
