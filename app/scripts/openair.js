@@ -84,7 +84,7 @@ app.service('OpenAirService', function() {
         $('.timesheetHours').each(function () {
             var time = $(this).find('.timesheetInputHour').val();
             if (time.length < 1) {
-                // We've reached the end! Abort!
+                // This one's empty, so skip it.
                 return;
             }
             var date = $(this).find('a').attr('data-additional-title').substring(0, 2).toLowerCase();
@@ -94,6 +94,7 @@ app.service('OpenAirService', function() {
             var taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text().split(': ')[1];
             var notesID = $(this).find('a').attr('data-additional-prefix');
             var notes = parent.findNotes(notesID);
+            var id = $(this).find('input').attr('id');
             if (!timeEntries[date]) {
                 timeEntries[date] = [];
             }
@@ -103,7 +104,8 @@ app.service('OpenAirService', function() {
                 projectName: projectName,
                 task: task,
                 taskName: taskName,
-                notes: notes
+                notes: notes,
+                id: id
             });
         });
         return timeEntries;
@@ -111,8 +113,8 @@ app.service('OpenAirService', function() {
 
 
     /**
-     * Given a notesID which is easy to find, find the actual notes which
-     * are pants-on-head difficult to find, involving parsing JSON out of a
+     * Given a notesID which is easy to find, find the actual note which
+     * is pants-on-head difficult to find, involving parsing JSON out of a
      * <script> tag and traversing it until you find the right ID.
      *
      * @param {string} notesID
@@ -130,4 +132,17 @@ app.service('OpenAirService', function() {
         });
         return notes;
     };
+
+    /**
+     * Delete a time entry from the OpenAir timesheet grid, by ID.
+     *
+     * Note that we don't have to remove anything besides the hours field, since
+     * OA will remove everything else the next time it's saved if the hours
+     * field is empty.
+     *
+     * @param id
+     */
+    this.deleteTime = function(id) {
+        $('#' + id).val('');
+    }
 });

@@ -52,6 +52,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     /**
      * Deletes a specific time entry from a specific day and populates the form
      * with its info for editing.
+     *
      * @param {Object} entry
      * @param {String} day
      */
@@ -63,10 +64,14 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         $scope.time = entry.time;
         $scope.when = [day];
         $scope.deleteTime(entry, day);
+
+        // Now that it's deleted from $scope, also remove it from the OA grid.
+        OpenAirService.deleteTime(entry.id);
     };
 
     /**
      * Deletes a specific time entry on a specific day.
+     *
      * @param {Object} entry
      * @param {String} day
      */
@@ -81,10 +86,14 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             }
             return true;
         });
+
+        // Now that it's deleted from $scope, also remove it from the OA grid.
+        OpenAirService.deleteTime(entry.id);
     };
 
     /**
      * Adds up all the time for a list of time entries.
+     *
      * @param {Array} timeEntries
      * @returns {number} sum
      */
@@ -98,6 +107,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
     /**
      * Return the 2 letter code of the current date.
+     *
      * @returns {String}
      */
     $scope.getDay = function() {
@@ -144,6 +154,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     /**
      * Adds an "Enter" key listener to submit the form on Enter press
      * if the fields have been filled out.
+     *
      * @TODO: Use a directive instead.
      */
     document.addEventListener("keydown", function(e) {
