@@ -47,13 +47,11 @@ app.service('OpenAirService', function() {
         });
 
         if ($selects.length) {
-//            debugger;
             // Yay! We already have a "Tasks" dropdown for that project, so we
             // can just use that and move on.
             var $taskoptions = $selects.first().parent().next().find('option');
 
         } else {
-//            debugger;
             // Sadly, no rows already exist for this project, so we have to create
             // one, and then manually trigger a .click() on the project select
             // so that the task list gets built, and then cycle through that.
