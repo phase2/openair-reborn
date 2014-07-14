@@ -2,13 +2,14 @@
 
 /*global $:false */
 /*global app:false */
+/*global angular:false */
 
 /**
  * A bunch of helper functions to get data from OA and put data into OA.
  */
 app.service('OpenAirService', function() {
 
-    var parent = this;
+    var parent = this; // Used in functions below to reference other functions below.
 
     /**
      * Returns the list of available projects in a key: value object.
@@ -46,41 +47,20 @@ app.service('OpenAirService', function() {
             return $(this).val() === projectId;
         });
 
+        var $taskoptions;
         if ($selects.length) {
             // Yay! We already have a "Tasks" dropdown for that project, so we
             // can just use that and move on.
-            var $taskoptions = $selects.first().parent().next().find('option');
+            $taskoptions = $selects.first().parent().next().find('option');
 
         } else {
-            // Sadly, no rows already exist for this project, so we have to create
-            // one, and then manually trigger a .click() on the project select
-            // so that the task list gets built, and then cycle through that.
-            // This is not very performant, but I couldn't figure out how OA
-            // stores this stuff in JS, so this is the best I've got.
-
-            // Set the value of the last "Project" OA select (i.e., the empty one)
-            // to be the one we just chose, behind the scenes.
-            $('.timesheetControlPopupCustomerProject').last().val(projectId);
-
-            // This is a horrible horrible hack. Chrome extensions don't have the
-            // ability to .trigger('change'); on an element, which is the only "easy"
-            // way to find the Tasks for a given Project. I.e., we need to trigger
-            // a change to the Project select so that the Tasks select after it
-            // will be populated, and we can grab those options. We can do that by
-            // building our own <script> DOM element and inserting it. :(
-            // Stolen/modified from http://stackoverflow.com/a/11388087, and yes
-            // I tried the .dispatchEvent() idea first, and it didn't work.
-            var s = document.createElement('script');
-            s.textContent = "jQuery('.timesheetControlPopupCustomerProject').last().trigger('change')";
-            s.onload = function () {
-                this.parentNode.removeChild(this);
-            };
-            document.head.appendChild(s);
+            // Sigh, none already exist, so we must create our own.
+            parent.createNewRow(projectId);
 
             // Now that the Tasks select input is populated, we can fetch the values out
             // of it. However, There are no sane CSS selectors for that select input,
             // so we end up with this monstrosity.
-            var $taskoptions = $('.timesheetControlPopupCustomerProject').eq(-2).parent().next().find('option');
+            $taskoptions = $('.timesheetControlPopupCustomerProject').eq(-2).parent().next().find('option');
         }
 
         // Now that we have our "Tasks" dropdown, let's loop through the options
@@ -95,6 +75,32 @@ app.service('OpenAirService', function() {
         return tasks;
     };
 
+    /**
+     * Creates a new row at the end of the timesheet for a given project and
+     * triggers a click on it so that the task dropdown populates.
+     *
+     * @param {string} projectId
+     */
+    this.createNewRow = function(projectId) {
+        // First, set the value of the last "Project" OA select (i.e., the
+        // empty one) to be the one we just chose, behind the scenes.
+        $('.timesheetControlPopupCustomerProject').last().val(projectId);
+
+        // This is a horrible and slow hack. Chrome extensions don't have the
+        // ability to .trigger('change'); on an element, which is the only "easy"
+        // way to find the Tasks for a given Project. I.e., we need to trigger
+        // a change to the Project select so that the Tasks select after it
+        // will be populated, and we can grab those options. We can do that by
+        // building our own <script> DOM element and inserting it. :(
+        // Stolen/modified from http://stackoverflow.com/a/11388087, and yes
+        // I tried the .dispatchEvent() idea first, and it didn't work.
+        var s = document.createElement('script');
+        s.textContent = "jQuery('.timesheetControlPopupCustomerProject').last().trigger('change')";
+        s.onload = function () {
+            this.parentNode.removeChild(this);
+        };
+        document.head.appendChild(s);
+    };
 
     /**
      * Cycles through the default OA timesheet and grabs time entries out of
@@ -118,8 +124,8 @@ app.service('OpenAirService', function() {
             var projectName = projects[project].split(' : ')[1];
             var task = $(this).parents('tr').find('.timesheetControlPopup').val();
             var taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text().split(': ')[1];
-            var notesID = $(this).find('a').attr('data-additional-prefix');
-            var notes = parent.findNotes(notesID);
+            var notesId = $(this).find('a').attr('data-additional-prefix');
+            var notes = parent.findNotes(notesId);
             var id = $(this).find('input').attr('id');
             if (!timeEntries[date]) {
                 timeEntries[date] = [];
@@ -137,26 +143,117 @@ app.service('OpenAirService', function() {
         return timeEntries;
     };
 
+    /**
+     * Given a timeEntry object, add the data for it to the OA time grid,
+     * into the first available cell.
+     *
+     * @param {Object} timeEntry
+     * @returns {string}
+     */
+    this.addTime = function(timeEntry) {
+        // First we need to see if there's a row in the timesheet for this
+        // project and task combination already.
+        var cellId = this.findOpenCell(timeEntry.project, timeEntry.task, timeEntry.day);
+        $('#' + cellId).val(timeEntry.time);
+        return cellId;
+    };
 
     /**
-     * Given a notesID which is easy to find, find the actual note which
+     * Finds the ID of the first open cell that matches the day, project, and task
+     * passed in. Creates a new row if needed before doing so.
+     *
+     * @param {string} project
+     * @param {string} task
+     * @param {string} day
+     * @returns {string}
+     */
+    this.findOpenCell = function(project, task, day) {
+        var emptyCellId;
+        $('.timesheet tr').each(function() {
+            var $rowProject = $(this).find('.timesheetControlPopupCustomerProject');
+            var $rowTask = $(this).find('.timesheetControlPopup');
+            if ($rowProject.val() !== project || $rowTask.val() !== task) {
+                // Either the project or the task isn't a match, so skip it.
+                return;
+            }
+            var cellId = parent.findTimeCellId($rowProject.attr('id'), day);
+            if ($('#' + cellId).val() !== "") {
+                return;
+            }
+            emptyCellId = cellId;
+            return false;
+        });
+
+        if (!emptyCellId) {
+            parent.createNewRow(project);
+            $('.timesheetControlPopup').eq(-2).val(task); // Set the task dropdown value.
+            var projectCellId = $('.timesheetControlPopupCustomerProject').eq(-2).attr('id');
+            emptyCellId = parent.findTimeCellId(projectCellId, day);
+        }
+
+        return emptyCellId;
+    };
+
+    /**
+     * Generates the ID of a time entry cell based on the day and the ID of the
+     * project dropdown.
+     *
+     * Cells are all in the format "ts_c<column>_r<row>" so we just replace
+     * the column with the one for the day and the rest stays the same as the
+     * project dropdown iD.
+     *
+     * @param {string} projectCellId
+     * @param {int} day
+     * @returns {string}
+     */
+    this.findTimeCellId = function(projectCellId, day) {
+        var idParts = projectCellId.split('_');
+        var rowNum = idParts[2];
+        var colNum = parent.getDayNum(day) + 3;
+        var cellId = 'ts_c' + colNum + '_' + rowNum;
+        return cellId;
+    };
+
+    /**
+     * Given a notesId which is easy to find, find the actual note which
      * is pants-on-head difficult to find, involving parsing JSON out of a
      * <script> tag and traversing it until you find the right ID.
      *
-     * @param {string} notesID
+     * @param {string} notesId
      * @returns {string} notes
      */
-    this.findNotes = function(notesID) {
+    this.findNotes = function(notesId) {
         var timeData = JSON.parse($('#oa_model_timesheet').html());
         var notes = "test";
         angular.forEach(timeData.rows, function(row) {
             angular.forEach(row.fields, function(field) {
-                if (field.id === notesID) {
+                if (field.id === notesId) {
                     notes = field.details.data.notes;
                 }
             });
         });
         return notes;
+    };
+
+    /**
+     * Adds notes for a specific time entry into the OpenAir global OA object.
+     *
+     * @param {string} notes
+     * @param {string} notesId
+     */
+    this.addNotes = function(notes, notesId) {
+        // Chrome Extensions can't access global variables, like "OA" which means
+        // that we have to programmatically build and insert a <script> tag into
+        // the DOM to run global "OA" functions. Adding notes is one example of
+        // where that must be done, since notes are only stored in JS objects,
+        // meaning we can't just alter an input value in the DOM to store them.
+        var s = document.createElement('script');
+        s.textContent = "var tempTimesheet = new OA.comp.Timesheet();";
+        s.textContent += "tempTimesheet.dialog.model.value('notes', " + notes + ", " + notesId + ");";
+        s.onload = function () {
+            this.parentNode.removeChild(this);
+        };
+        document.head.appendChild(s);
     };
 
     /**
@@ -166,9 +263,27 @@ app.service('OpenAirService', function() {
      * OA will remove everything else the next time it's saved if the hours
      * field is empty.
      *
-     * @param id
+     * @param {string} id
      */
     this.deleteTime = function(id) {
         $('#' + id).val('');
-    }
+    };
+
+    /**
+     * Helper function to convert two digit day code to integer.
+     *
+     * @param {string} dayCode
+     * @returns {int}
+     */
+    this.getDayNum = function(dayCode) {
+        var  weekdays = [];
+        weekdays.mo = 0;
+        weekdays.tu = 1;
+        weekdays.we = 2;
+        weekdays.th = 3;
+        weekdays.fr = 4;
+        weekdays.sa = 5;
+        weekdays.su = 6;
+        return weekdays[dayCode];
+    };
 });

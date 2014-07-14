@@ -1,7 +1,6 @@
 'use strict';
 
 /*global angular:false */
-/*global $:false */
 /*global app:false */
 
 app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($scope, OpenAirService) {
@@ -31,12 +30,15 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
                 projectName: OpenAirService.fetchProjects()[$scope.project],
                 task: $scope.task,
                 taskName: OpenAirService.fetchTasks($scope.project)[$scope.task],
-                notes: $scope.notes
+                notes: $scope.notes,
+                day: day
             };
 
             if (!$scope.timeEntries[day]) {
                 $scope.timeEntries[day] = [];
             }
+
+            timeEntry.id = OpenAirService.addTime(timeEntry);
             $scope.timeEntries[day].push(timeEntry);
         });
 
@@ -122,7 +124,6 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         weekday[6] = "sa";
         return weekday[date.getDay()];
     };
-
 
     // Days of the week, to match code to day and cycle through in the view.
     $scope.weekdays = [
