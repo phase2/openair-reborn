@@ -155,6 +155,8 @@ app.service('OpenAirService', function() {
         // project and task combination already.
         var cellId = this.findOpenCell(timeEntry.project, timeEntry.task, timeEntry.day);
         $('#' + cellId).val(timeEntry.time);
+        var notesId = cellId.replace("ts", "");
+        parent.addNotes(timeEntry.notes, notesId);
         return cellId;
     };
 
@@ -247,13 +249,14 @@ app.service('OpenAirService', function() {
         // the DOM to run global "OA" functions. Adding notes is one example of
         // where that must be done, since notes are only stored in JS objects,
         // meaning we can't just alter an input value in the DOM to store them.
-        var s = document.createElement('script');
-        s.textContent = "var tempTimesheet = new OA.comp.Timesheet();";
-        s.textContent += "tempTimesheet.dialog.model.value('notes', " + notes + ", " + notesId + ");";
-        s.onload = function () {
-            this.parentNode.removeChild(this);
-        };
-        document.head.appendChild(s);
+//        var s = document.createElement('script');
+//        s.textContent = "var tempTimesheet = new OA.comp.Timesheet();";
+//        s.textContent += "tempTimesheet.dialog.model.value('notes', '" + notes + "', '" + notesId + "');";
+//        debugger;
+//        s.onload = function () {
+//            this.parentNode.removeChild(this);
+//        };
+//        document.head.appendChild(s);
     };
 
     /**
