@@ -71,7 +71,7 @@ app.service('OpenAirService', function() {
             // Stolen/modified from http://stackoverflow.com/a/11388087, and yes
             // I tried the .dispatchEvent() idea first, and it didn't work.
             var s = document.createElement('script');
-            s.textContent = "jQuery('.timesheetControlPopupCustomerProject').trigger('change')";
+            s.textContent = "jQuery('.timesheetControlPopupCustomerProject').last().trigger('change')";
             s.onload = function () {
                 this.parentNode.removeChild(this);
             };
