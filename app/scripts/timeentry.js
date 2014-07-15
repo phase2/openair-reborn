@@ -3,6 +3,10 @@
 /*global angular:false */
 /*global app:false */
 
+/**
+ * @file An Angular controller used for managing the custom UI for OpenAir.
+ */
+
 app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($scope, OpenAirService) {
 
     /**

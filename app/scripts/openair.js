@@ -5,6 +5,10 @@
 /*global angular:false */
 
 /**
+ * @file An Angular service used for interacting with the OpenAir UI in code.
+ */
+
+/**
  * A bunch of helper functions to get data from OA and put data into OA.
  */
 app.service('OpenAirService', function() {
@@ -185,7 +189,7 @@ app.service('OpenAirService', function() {
             this.parentNode.removeChild(this);
         };
         document.head.appendChild(s);
-    }
+    };
 
     /**
      * Finds the ID of the first open cell that matches the day, project, and task
