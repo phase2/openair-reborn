@@ -94,12 +94,8 @@ app.service('OpenAirService', function() {
         // building our own <script> DOM element and inserting it. :(
         // Stolen/modified from http://stackoverflow.com/a/11388087, and yes
         // I tried the .dispatchEvent() idea first, and it didn't work.
-        var s = document.createElement('script');
-        s.textContent = "jQuery('.timesheetControlPopupCustomerProject').last().trigger('change')";
-        s.onload = function () {
-            this.parentNode.removeChild(this);
-        };
-        document.head.appendChild(s);
+        var jsString = "jQuery('.timesheetControlPopupCustomerProject').last().trigger('change')";
+        this.injectJs(jsString);
     };
 
     /**
@@ -151,14 +147,45 @@ app.service('OpenAirService', function() {
      * @returns {string}
      */
     this.addTime = function(timeEntry) {
-        // First we need to see if there's a row in the timesheet for this
-        // project and task combination already.
+        // First we need to find the first open cell that matches this project,
+        // task, and day combination, even if it means creating a new row.
         var cellId = this.findOpenCell(timeEntry.project, timeEntry.task, timeEntry.day);
+
+        // Then we set the value of that cell.
         $('#' + cellId).val(timeEntry.time);
+
+        // That takes care of the time field, now we have to add the notes.
         var notesId = cellId.replace("ts", "");
         parent.addNotes(timeEntry.notes, notesId);
+
+        // Finally, let's .trigger('change') on the hours and tasks fields so that
+        // OpenAir realizes they have been updated.
+        var idParts = cellId.split('_');
+        var rowNum = idParts[2];
+        var taskCellId = 'ts_c2_' + rowNum;
+        var jsString = "jQuery('#" + cellId + "').trigger('change');";
+        jsString += "jQuery('#" + taskCellId + "').trigger('change');";
+        this.injectJs(jsString);
+
         return cellId;
     };
+
+    /**
+     * Builds a <script> tag with the given JS code and injects it into a page.
+     *
+     * This allows us to run JS that isn't strictly allowed in Chrome extension,
+     * such as .trigger()ing things such as click and change.
+     *
+     * @param {string} jsString
+     */
+    this.injectJs = function(jsString) {
+        var s = document.createElement('script');
+        s.textContent = jsString;
+        s.onload = function () {
+            this.parentNode.removeChild(this);
+        };
+        document.head.appendChild(s);
+    }
 
     /**
      * Finds the ID of the first open cell that matches the day, project, and task
@@ -171,22 +198,52 @@ app.service('OpenAirService', function() {
      */
     this.findOpenCell = function(project, task, day) {
         var emptyCellId;
-        $('.timesheet tr').each(function() {
+        $('#timesheet_grid table.timesheet tr').each(function() {
             var $rowProject = $(this).find('.timesheetControlPopupCustomerProject');
             var $rowTask = $(this).find('.timesheetControlPopup');
+
             if ($rowProject.val() !== project || $rowTask.val() !== task) {
+                // Ok, so both the project and the task don't match, but does
+                // the project field match by itself, and the task field is empty?
+                if ($rowProject.val() === project && $rowTask.val() === "0") {
+                    // If the project does match and the task field is empty, we
+                    // can see if all the time fields are empty as well, and if
+                    // so, we can use this field and set the task field ourselves.
+                    var $nonEmptyFields = $(this).find('.timesheetInputHours').filter(function() {
+                        return $.trim(this.value) !== "";
+                    });
+
+                    if (!$nonEmptyFields.length) {
+                        // If there are no populated time fields, then we can set the
+                        // task field on this row and use it, because this is just
+                        // an empty row with the project populated, as the fetchTasks()
+                        // function tends to create.
+                        $rowTask.val(task);
+                        emptyCellId = parent.findTimeCellId($rowProject.attr('id'), day);
+                        return false; // Kill the loop
+                    }
+                }
                 // Either the project or the task isn't a match, so skip it.
                 return;
             }
-            var cellId = parent.findTimeCellId($rowProject.attr('id'), day);
-            if ($('#' + cellId).val() !== "") {
+
+            // Project and task match for this row, so now we check the time
+            // field that we're after to see if it has a value already.
+            emptyCellId = parent.findTimeCellId($rowProject.attr('id'), day);
+            if ($('#' + emptyCellId).val() !== "") {
+                // Time field unfortunately is already filled out, so we move
+                // on to the next row in the loop.
+                emptyCellId = null;
                 return;
             }
-            emptyCellId = cellId;
-            return false;
+            // Yay, the time field is empty, and we can use it! So let's do that.
+            return false; // Kill the loop
         });
 
         if (!emptyCellId) {
+            // We made it all the way through the loop without finding an empty
+            // time field with the correct project and task, so now we have to
+            // create our own row and use that.
             parent.createNewRow(project);
             $('.timesheetControlPopup').eq(-2).val(task); // Set the task dropdown value.
             var projectCellId = $('.timesheetControlPopupCustomerProject').eq(-2).attr('id');
@@ -253,14 +310,15 @@ app.service('OpenAirService', function() {
         // the value of an input. Chrome extensions can't trigger things, so
         // we have to insert a new <script> tag into the page with the code
         // we want to run (see note in fetchTasks() for more info).
-        var s = document.createElement('script');
-        s.textContent = "jQuery('" + idAttr + "').trigger('click');";
-        s.textContent += "jQuery('#tm_notes').val('" + notes + "');";
-        s.textContent += "jQuery('.dialogOkButton').trigger('click');";
-        s.onload = function () {
-            this.parentNode.removeChild(this);
-        };
-        document.head.appendChild(s);
+
+        // Click the "notes" link to open the popup
+        var jsString = "jQuery('" + idAttr + "').trigger('click');";
+        // Enter the value into the textarea in the popup
+        jsString += "jQuery('#tm_notes').val('" + notes + "');";
+        // Click the submit button to close the popup and save the notes
+        jsString += "jQuery('.dialogOkButton').trigger('click');";
+
+        this.injectJs(jsString);
     };
 
     /**
@@ -274,6 +332,8 @@ app.service('OpenAirService', function() {
      */
     this.deleteTime = function(id) {
         $('#' + id).val('');
+        var jsString = "jQuery('#" + id + "').trigger('change');";
+        this.injectJs(jsString);
     };
 
     /**
