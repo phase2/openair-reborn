@@ -244,19 +244,23 @@ app.service('OpenAirService', function() {
      * @param {string} notesId
      */
     this.addNotes = function(notes, notesId) {
-        // Chrome Extensions can't access global variables, like "OA" which means
-        // that we have to programmatically build and insert a <script> tag into
-        // the DOM to run global "OA" functions. Adding notes is one example of
-        // where that must be done, since notes are only stored in JS objects,
-        // meaning we can't just alter an input value in the DOM to store them.
-//        var s = document.createElement('script');
-//        s.textContent = "var tempTimesheet = new OA.comp.Timesheet();";
-//        s.textContent += "tempTimesheet.dialog.model.value('notes', '" + notes + "', '" + notesId + "');";
-//        debugger;
-//        s.onload = function () {
-//            this.parentNode.removeChild(this);
-//        };
-//        document.head.appendChild(s);
+        var idAttr = '#ts_notes' + notesId;
+        notes = notes.replace(/'/g, "&#39;"); // Escape single quotes if they exist.
+
+        // To populate notes, we need to programmatically go through the routine
+        // of clicking the "notes" link, populating the textarea, and submitting
+        // the popup, since OA of course couldn't make it as easy as setting
+        // the value of an input. Chrome extensions can't trigger things, so
+        // we have to insert a new <script> tag into the page with the code
+        // we want to run (see note in fetchTasks() for more info).
+        var s = document.createElement('script');
+        s.textContent = "jQuery('" + idAttr + "').trigger('click');";
+        s.textContent += "jQuery('#tm_notes').val('" + notes + "');";
+        s.textContent += "jQuery('.dialogOkButton').trigger('click');";
+        s.onload = function () {
+            this.parentNode.removeChild(this);
+        };
+        document.head.appendChild(s);
     };
 
     /**
