@@ -9,6 +9,8 @@ Download it from the Chrome Webstore. (Link coming soon!)
 
 ### How to contribute
 
+Don't be scared! Setup only takes 2 minutes.
+
 **Step 1: Download and install dependencies**
 
 1. Fork this repo and clone your fork locally.
