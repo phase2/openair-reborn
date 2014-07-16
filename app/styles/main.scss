@@ -46,6 +46,13 @@ $lightgray: #f4f2ed;
       width: 100%;
       background: white !important;
     }
+    .p2-input:focus,
+    .chosen-container-active .chosen-choices,
+    .chosen-container-active .chosen-single {
+      -webkit-box-shadow: 0 1px 4px rgba(0, 255, 0, .7) !important;
+      -moz-box-shadow: 0 1px 4px rgba(0, 255, 0, .7) !important;
+      box-shadow: 0 1px 4px rgba(0, 255, 0, .7) !important;
+    }
     .chosen-container-multi .chosen-choices {
       padding: 13px 15px 14px;
       margin-top: -3px;
