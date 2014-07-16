@@ -20,7 +20,7 @@ Download it from the Chrome Webstore. (Link coming soon!)
 **Step 2: Install from source**
 
 1. Disable the Webstore version of the extension if you have it enabled.
-2. Open up chrome://extensions and click "Developer mode".
+2. Open up [chrome://extensions](chrome://extensions) and click "Developer mode".
 3. Click "Load unpacked extension" and browse to the `app/` directory to install it.
 4. The extension should be running now. Reload an OpenAir timesheet to confirm.
 
@@ -31,4 +31,4 @@ Download it from the Chrome Webstore. (Link coming soon!)
    and CSS changes should be applied automatically, but you still have to reload
    the OpenAir tab to make it pick up any JS changes.
 3. When you're done with your changes, push them to your fork and create a pull request for them.
-4. You can also run "grunt build" at any time to bump the manifest version and generate a Webstore compatible zip file for upload.
+4. You can also run `grunt build` at any time to bump the manifest version and generate a Webstore compatible zip file for upload.
