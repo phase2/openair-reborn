@@ -75,10 +75,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         $scope.task = entry.task;
         $scope.time = entry.time;
         $scope.when = [day];
-        $scope.deleteTime(entry, day);
-
-        // Now that it's deleted from $scope, also remove it from the OA grid.
-        OpenAirService.deleteTime(entry.id);
+        $scope.deleteTime(entry, day, true);
     };
 
     /**
@@ -87,8 +84,8 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
      * @param {Object} entry
      * @param {String} day
      */
-    $scope.deleteTime = function(entry, day) {
-        if (!confirm('Are you sure you want to delete that time entry?')) {
+    $scope.deleteTime = function(entry, day, edit) {
+        if (!edit && !confirm('Are you sure you want to delete that time entry?')) {
             return;
         }
         var entries = $scope.timeEntries[day];
