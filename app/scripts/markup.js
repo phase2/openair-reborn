@@ -3,7 +3,7 @@
 /*global angular:false */
 /*exported app*/
 
-var app = angular.module('OpenAirReborn',['localytics.directives']);
+var app = angular.module('OpenAirReborn',['localytics.directives', 'timer']);
 
 function addInitialMarkup() {
     var $timesheet = $('#timesheet_grid');

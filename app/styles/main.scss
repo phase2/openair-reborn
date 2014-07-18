@@ -1,5 +1,6 @@
 $lightblue: #99cee7;
 $lightgray: #f4f2ed;
+$green: #a9dd2d;
 
 // Miscellaneous OpenAir fixes start here
 .timesheet td.formButtonBar #save_grid_submit {
@@ -7,7 +8,18 @@ $lightgray: #f4f2ed;
 }
 
 .timesheet td.formButtonBarOnFullScreen {
-  padding-right: 125px;
+  padding-right: 10% !important;
+}
+
+@media (max-width: 768px) {
+  #save_grid_submit {
+    display: block;
+    float: right;
+  }
+  #timesheet_form_button_bar {
+    position: relative;
+    top: -18px;
+  }
 }
 
 // Styles for OpenAir Reborn start here
@@ -113,6 +125,34 @@ $lightgray: #f4f2ed;
       border: 1px solid rgb(170, 170, 170) !important;
     }
 
+    @media (max-width: 992px) {
+      .p2-row div.p2-input-wrapper {
+        width: 29.4%;
+        &.p2-date-wrapper .chosen-container {
+          width: 100% !important;
+        }
+        &.p2-button-wrapper {
+          clear: both;
+          display: block;
+          width: 100%;
+          input {
+            width: 100%;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .p2-row div.p2-input-wrapper {
+        width: 100% !important;
+        display: block;
+        .chosen-container,
+        input {
+          width: 100% !important;
+        }
+      }
+    }
   }
 
   .p2-table-wrapper {
@@ -123,6 +163,7 @@ $lightgray: #f4f2ed;
       font-weight: normal;
       color: #777;
       font-size: 22px;
+      margin-left: 10px;
     }
     table {
       width: 95%;
@@ -135,9 +176,6 @@ $lightgray: #f4f2ed;
       text-overflow: ellipsis;
       text-align: left;
       font-size: 14px;
-      &:first-child {
-        padding-left: 0;
-      }
       &:last-child {
         padding-right: 0;
       }
@@ -171,6 +209,9 @@ $lightgray: #f4f2ed;
         white-space: nowrap;
         overflow: hidden;
         text-indent: 100%;
+        &.p2-timer-link {
+          background: transparent url(http://i.imgur.com/sPjWo4O.png);
+        }
         &.p2-edit-link {
           background: transparent url(http://i.imgur.com/FNOH9ab.png);
         }
@@ -187,6 +228,12 @@ $lightgray: #f4f2ed;
       background: $lightgray;
       .p2-edit {
         opacity: 1;
+      }
+    }
+    &.timing {
+      background-color: $green;
+      .p2-timer-link {
+        background: transparent url(http://i.imgur.com/fzY94u7.png) !important;
       }
     }
   }

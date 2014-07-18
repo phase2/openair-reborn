@@ -25,7 +25,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     $scope.addTime = function(e) {
         e.preventDefault();
 
-        if (!$scope.notes || !$scope.project || !$scope.task || !$scope.time) {
+        if (!$scope.notes || !$scope.project || !$scope.task) {
             // Don't submit time if there are some empty fields.
             alert('Please fill out all fields before submitting the form.');
             return;
@@ -43,8 +43,16 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
                 task: $scope.task,
                 taskName: OpenAirService.fetchTasks($scope.project)[$scope.task],
                 notes: $scope.notes,
-                day: day
+                day: day,
+                timerStart: 0
             };
+
+            if (timeEntry.time) {
+                timeEntry.timerStart = timeEntry.time * 60 * 60 * 1000;
+            } else {
+                timeEntry.timing = true;
+                timeEntry.timerStarted = true;
+            }
 
             if (!$scope.timeEntries[day]) {
                 $scope.timeEntries[day] = [];
@@ -52,6 +60,12 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
             timeEntry.id = OpenAirService.addTime(timeEntry);
             $scope.timeEntries[day].push(timeEntry);
+
+            $scope.$apply();
+
+            if (timeEntry.timing) {
+                angular.element('.entryid-' + timeEntry.id + ' timer')[0].start();
+            }
         });
 
         // Reset the notes field since we can be sure that won't be repeated
@@ -78,6 +92,31 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         $scope.time = entry.time;
         $scope.when = [day];
         $scope.deleteTime(entry, day, true);
+    };
+
+    /**
+     * Edit the hours for a specific time entry. Used by the timer.
+     *
+     * @TODO: Clean up this horrible, horrible function.
+     *
+     * @param timeId
+     * @param hours
+     */
+    $scope.editHours = function(timeId, hours) {
+        var col = timeId.split('_')[1];
+        col = col.split("")[1];
+        if (col === 9) {
+            col = 2;
+        }
+        var day = $scope.getDaysArray()[col - 2];
+
+        angular.forEach($scope.timeEntries[day], function(entry) {
+            if (entry.id === timeId) {
+                entry.time = hours.toFixed(3);
+                OpenAirService.addHours(entry.id, hours);
+                return;
+            }
+        });
     };
 
     /**
@@ -113,8 +152,33 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         angular.forEach(timeEntries, function(entry) {
             sum += parseFloat(entry.time);
         });
-        return sum;
+        return parseFloat(sum.toFixed(3));
     };
+
+    /**
+     * Toggles a timer for a given time entry object.
+     *
+     * @param {Object} entry
+     */
+    $scope.toggleTimer = function(entry) {
+        if (entry.timing) {
+            angular.element('.entryid-' + entry.id + ' timer')[0].stop();
+        } else {
+            if (entry.timerStarted) {
+                angular.element('.entryid-' + entry.id + ' timer')[0].resume();
+            } else {
+                angular.element('.entryid-' + entry.id + ' timer')[0].start();
+                entry.timerStarted = true;
+            }
+        }
+        entry.timing = !entry.timing;
+    };
+
+    $scope.$on('timer-tick', function (event, data){
+        var hours = data.millis / 1000 / 60 / 60;
+        $scope.editHours(data.cellId, hours);
+        $scope.$apply();
+    });
 
     /**
      * Return the 2 letter code of the current date.
@@ -123,15 +187,27 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
      */
     $scope.getDay = function() {
         var date = new Date();
-        var weekday = new Array(7);
-        weekday[0]=  "su";
-        weekday[1] = "mo";
-        weekday[2] = "tu";
-        weekday[3] = "we";
-        weekday[4] = "th";
-        weekday[5] = "fr";
-        weekday[6] = "sa";
-        return weekday[date.getDay()];
+        var weekdays = $scope.getDaysArray();
+        return weekdays[date.getDay()];
+    };
+
+    /**
+     * Simple conversion function, since we are using two letter
+     * date codes instead of numbers.
+     *
+     * @TODO: Start using numbers. It'll remove a lot of dumb logic.
+     * @returns {Array}
+     */
+    $scope.getDaysArray = function() {
+        var weekdays = new Array(7);
+        weekdays[0]=  "su";
+        weekdays[1] = "mo";
+        weekdays[2] = "tu";
+        weekdays[3] = "we";
+        weekdays[4] = "th";
+        weekdays[5] = "fr";
+        weekdays[6] = "sa";
+        return weekdays;
     };
 
     // Days of the week, to match code to day and cycle through in the view.
@@ -161,6 +237,15 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     // Default the "Day" field to the current day.
     $scope.when = [$scope.getDay()];
 
+    // Update the submit button's value based on whether the time field has a vlue or not.
+    $scope.$watch('time', function(newTime) {
+        if (newTime) {
+            $scope.submitButton = "Add";
+        } else {
+            $scope.submitButton = "Start";
+        }
+    });
+
     /**
      * Adds an "Enter" key listener to submit the form on Enter press
      * if the fields have been filled out.
@@ -189,7 +274,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             }
 
             // Enter key was pressed! Can we submit the form?
-            if ($scope.notes && $scope.project && $scope.task && $scope.time) {
+            if ($scope.notes && $scope.project && $scope.task) {
 
                 // Woohoo! We can add some time!
                 $scope.addTime(e);

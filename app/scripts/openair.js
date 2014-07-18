@@ -132,6 +132,7 @@ app.service('OpenAirService', function() {
             }
             timeEntries[date].push({
                 time: time,
+                timerStart: time * 60 * 60 * 1000,
                 project: project,
                 projectName: projectName,
                 task: task,
@@ -156,7 +157,7 @@ app.service('OpenAirService', function() {
         var cellId = this.findOpenCell(timeEntry.project, timeEntry.task, timeEntry.day);
 
         // Then we set the value of that cell.
-        $('#' + cellId).val(timeEntry.time);
+        parent.addHours(cellId, timeEntry.time);
 
         // That takes care of the time field, now we have to add the notes.
         var notesId = cellId.replace("ts", "");
@@ -169,9 +170,21 @@ app.service('OpenAirService', function() {
         var taskCellId = 'ts_c2_' + rowNum;
         var jsString = "jQuery('#" + cellId + "').trigger('change');";
         jsString += "jQuery('#" + taskCellId + "').trigger('change');";
-        this.injectJs(jsString);
+        parent.injectJs(jsString);
 
         return cellId;
+    };
+
+    /**
+     * Simple function to set the value of a time cell ID.
+     *
+     * @param {string} cellId
+     * @param {float} hours
+     */
+    this.addHours = function(cellId, hours) {
+        $('#' + cellId).val(hours);
+        var jsString = "jQuery('#" + cellId + "').trigger('change');";
+        parent.injectJs(jsString);
     };
 
     /**

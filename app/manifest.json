@@ -40,6 +40,7 @@
                 "scripts/markup.js",
                 "scripts/timeentry.js",
                 "scripts/openair.js",
+                "scripts/timer.js",
                 "bower_components/angular-chosen-localytics/chosen.js"
             ],
             "run_at": "document_end",
