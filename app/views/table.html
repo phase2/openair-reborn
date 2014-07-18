@@ -3,8 +3,10 @@
         <div ng-show="timeEntries[day.code]">
             <h2>{{day.name}} ({{sumTime(timeEntries[day.code])}} hours)</h2>
             <table cellpadding="0" cellspacing="0">
-                <tr ng-class="{timing: entry.timing}" ng-repeat="entry in timeEntries[day.code] | orderBy : 'projectName'">
-                    <td class="p2-time">{{entry.time}} hr</td>
+                <tr class="entryid-{{entry.id}}" ng-class="{timing: entry.timing}" ng-repeat="entry in timeEntries[day.code] | orderBy : 'projectName'">
+                    <td class="p2-time">
+                        <timer start-time="entry.timerStart" autostart="false" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                    </td>
                     <td class="p2-project">{{entry.projectName}} <span>({{entry.taskName}})</span></td>
                     <td class="p2-notes">{{entry.notes}}</td>
                     <td class="p2-edit">
