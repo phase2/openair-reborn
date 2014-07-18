@@ -2,6 +2,8 @@
 
 /*global angular:false */
 /*global app:false */
+/*global alert:false */
+/*global confirm:false */
 
 /**
  * @file An Angular controller used for managing the custom UI for OpenAir.
@@ -25,7 +27,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
         if (!$scope.notes || !$scope.project || !$scope.task || !$scope.time) {
             // Don't submit time if there are some empty fields.
-            alert('Please fill out all fields before submitting the form.')
+            alert('Please fill out all fields before submitting the form.');
             return;
         }
 
