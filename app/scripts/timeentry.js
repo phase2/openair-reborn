@@ -116,6 +116,10 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         return sum;
     };
 
+    $scope.toggleTimer = function(entry) {
+        entry.timing = !entry.timing;
+    };
+
     /**
      * Return the 2 letter code of the current date.
      *

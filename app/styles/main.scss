@@ -1,5 +1,6 @@
 $lightblue: #99cee7;
 $lightgray: #f4f2ed;
+$green: #a9dd2d;
 
 // Miscellaneous OpenAir fixes start here
 .timesheet td.formButtonBar #save_grid_submit {
@@ -123,6 +124,7 @@ $lightgray: #f4f2ed;
       font-weight: normal;
       color: #777;
       font-size: 22px;
+      margin-left: 10px;
     }
     table {
       width: 95%;
@@ -135,9 +137,6 @@ $lightgray: #f4f2ed;
       text-overflow: ellipsis;
       text-align: left;
       font-size: 14px;
-      &:first-child {
-        padding-left: 0;
-      }
       &:last-child {
         padding-right: 0;
       }
@@ -171,6 +170,9 @@ $lightgray: #f4f2ed;
         white-space: nowrap;
         overflow: hidden;
         text-indent: 100%;
+        &.p2-timer-link {
+          background: transparent url(http://i.imgur.com/sPjWo4O.png);
+        }
         &.p2-edit-link {
           background: transparent url(http://i.imgur.com/FNOH9ab.png);
         }
@@ -187,6 +189,12 @@ $lightgray: #f4f2ed;
       background: $lightgray;
       .p2-edit {
         opacity: 1;
+      }
+    }
+    &.timing {
+      background-color: $green;
+      .p2-timer-link {
+        background: transparent url(http://i.imgur.com/fzY94u7.png) !important;
       }
     }
   }

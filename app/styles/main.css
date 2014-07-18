@@ -1,30 +1,30 @@
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\000035}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\000036}}
 .timesheet td.formButtonBar #save_grid_submit {
   margin-right: 10px !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\000039}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000310}}
 .timesheet td.formButtonBarOnFullScreen {
   padding-right: 125px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000314}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000315}}
 #timesheet_grid, .timesheetPinned, #timesheet_header_lower {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000318}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000319}}
 #p2_content {
   width: 100%;
   padding-left: 4em;
   margin-top: 2em;
   box-sizing: border-box;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000324}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000325}}
 #p2_content * {
   box-sizing: border-box;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000328}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000329}}
 #p2_content .p2-form-wrapper {
   padding: 1.5em;
   width: 95%;
@@ -32,7 +32,7 @@
   clear: both;
   overflow: visible;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000337}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000338}}
 #p2_content .p2-form-wrapper .p2-input,
 #p2_content .p2-form-wrapper .chosen-single,
 #p2_content .p2-form-wrapper .chosen-container-multi .chosen-choices {
@@ -47,7 +47,7 @@
   width: 100%;
   background: white !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000351}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000352}}
 #p2_content .p2-form-wrapper .p2-input:focus,
 #p2_content .p2-form-wrapper .chosen-container-active .chosen-choices,
 #p2_content .p2-form-wrapper .chosen-container-active .chosen-single {
@@ -55,95 +55,96 @@
   -moz-box-shadow: 0 1px 4px rgba(0, 255, 0, 0.7) !important;
   box-shadow: 0 1px 4px rgba(0, 255, 0, 0.7) !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000356}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000357}}
 #p2_content .p2-form-wrapper .chosen-container-multi .chosen-choices {
   padding: 13px 15px 14px;
   margin-top: -3px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000359}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000360}}
 #p2_content .p2-form-wrapper .chosen-container-multi .chosen-choices input {
   padding: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000362}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000363}}
 #p2_content .p2-form-wrapper .chosen-container-multi .chosen-choices li.search-choice {
   margin-top: 0;
   margin-bottom: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000368}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000369}}
 #p2_content .p2-form-wrapper .p2-row div.p2-input-wrapper {
   width: 26%;
   display: inline-block;
   margin-top: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000372}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000373}}
 #p2_content .p2-form-wrapper .p2-row div.p2-input-wrapper input {
   width: 90%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000376}}
 #p2_content .p2-form-wrapper .p2-row div.p2-input-wrapper select {
   display: block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000379}}
 #p2_content .p2-form-wrapper .p2-row div.p2-input-wrapper label {
   font-size: 16px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000381}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000382}}
 #p2_content .p2-form-wrapper .p2-row div.p2-input-wrapper.p2-text {
   width: 10%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000384}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000385}}
 #p2_content .p2-form-wrapper .p2-row div.p2-input-wrapper .p2-submit {
   padding: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000389}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000390}}
 #p2_content .p2-form-wrapper .chosen-container {
   width: 95% !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000391}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000392}}
 #p2_content .p2-form-wrapper .chosen-container .chosen-single {
   height: 48px;
   padding: 11px 15px;
   font-size: 16px;
   margin-top: -3px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000397}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\0000398}}
 #p2_content .p2-form-wrapper .chosen-container .search-choice span {
   text-overflow: ellipsis;
   max-width: 50px;
   display: inline-block;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003104}}
 #p2_content .p2-form-wrapper .chosen-container .chosen-search input {
   width: 100% !important;
   margin-bottom: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003107}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003108}}
 #p2_content .p2-form-wrapper .chosen-container .chosen-results li.highlighted {
   color: black !important;
   background: #99cee7 !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003112}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003113}}
 #p2_content .p2-form-wrapper .chosen-with-drop .chosen-single {
   border: 1px solid #aaaaaa !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003118}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003119}}
 #p2_content .p2-table-wrapper {
   margin-top: 20px;
   font-size: 14px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003121}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003122}}
 #p2_content .p2-table-wrapper h2 {
   margin: 40px 0 20px;
   font-weight: normal;
   color: #777;
   font-size: 22px;
+  margin-left: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003127}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003129}}
 #p2_content .p2-table-wrapper table {
   width: 95%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003130}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003132}}
 #p2_content .p2-table-wrapper td, #p2_content .p2-table-wrapper th {
   padding: 10px;
   border: none;
@@ -153,42 +154,38 @@
   text-align: left;
   font-size: 14px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003138}}
-#p2_content .p2-table-wrapper td:first-child, #p2_content .p2-table-wrapper th:first-child {
-  padding-left: 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003141}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003140}}
 #p2_content .p2-table-wrapper td:last-child, #p2_content .p2-table-wrapper th:last-child {
   padding-right: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003145}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003144}}
 #p2_content .p2-table-wrapper .p2-project {
   width: 30%;
   color: black;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003148}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003147}}
 #p2_content .p2-table-wrapper .p2-project span {
   color: #777;
   font-size: 12px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003153}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003152}}
 #p2_content .p2-table-wrapper .p2-notes {
   width: 55%;
   color: #777;
   font-style: italic;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003158}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003157}}
 #p2_content .p2-table-wrapper .p2-time {
   width: 5%;
   font-weight: bold;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003162}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003161}}
 #p2_content .p2-table-wrapper .p2-edit {
   width: 10%;
   text-align: right;
   opacity: 0.1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003166}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003165}}
 #p2_content .p2-table-wrapper .p2-edit a {
   display: inline-block;
   margin-right: 10px;
@@ -198,51 +195,63 @@
   overflow: hidden;
   text-indent: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003174}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003173}}
+#p2_content .p2-table-wrapper .p2-edit a.p2-timer-link {
+  background: transparent url(http://i.imgur.com/sPjWo4O.png);
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003176}}
 #p2_content .p2-table-wrapper .p2-edit a.p2-edit-link {
   background: transparent url(http://i.imgur.com/FNOH9ab.png);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003179}}
 #p2_content .p2-table-wrapper .p2-edit a.p2-delete-link {
   background: transparent url(http://i.imgur.com/2onIns8.png);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003183}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003185}}
 #p2_content tr {
   -webkit-animation: blue-fade 0.5s ease-in 1;
   animation: blue-fade 0.5s ease-in 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003186}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003188}}
 #p2_content tr:hover {
   background: #f4f2ed;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003188}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003190}}
 #p2_content tr:hover .p2-edit {
   opacity: 1;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003197}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003194}}
+#p2_content tr.timing {
+  background-color: #a9dd2d;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003196}}
+#p2_content tr.timing .p2-timer-link {
+  background: transparent url(http://i.imgur.com/fzY94u7.png) !important;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/mcrittenden\/Documents\/Code\/openair-reborn\/app\/styles\/main\.scss}line{font-family:\00003205}}
 #p2_content .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
   background: url("http://i.imgur.com/C0JrorS.png") -42px 1px no-repeat;
 }
 
 @-webkit-keyframes blue-fade {
-  /* line 204, main.scss */
+  /* line 212, main.scss */
   0% {
     background: #99cee7;
   }
 
-  /* line 205, main.scss */
+  /* line 213, main.scss */
   100% {
     background: none;
   }
 }
 
 @keyframes blue-fade {
-  /* line 209, main.scss */
+  /* line 217, main.scss */
   0% {
     background: #99cee7;
   }
 
-  /* line 210, main.scss */
+  /* line 218, main.scss */
   100% {
     background: none;
   }

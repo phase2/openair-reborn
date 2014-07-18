@@ -4,7 +4,8 @@
   "dependencies": {
     "angular": "~1.2.19",
     "jquery": "~2.1.1",
-    "angular-chosen-localytics": "~1.0.6"
+    "angular-chosen-localytics": "~1.0.6",
+    "angular-timer": "~1.1.6"
   },
   "devDependencies": {}
 }
