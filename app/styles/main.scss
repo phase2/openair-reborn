@@ -8,7 +8,18 @@ $green: #a9dd2d;
 }
 
 .timesheet td.formButtonBarOnFullScreen {
-  padding-right: 125px;
+  padding-right: 10% !important;
+}
+
+@media (max-width: 768px) {
+  #save_grid_submit {
+    display: block;
+    float: right;
+  }
+  #timesheet_form_button_bar {
+    position: relative;
+    top: -18px;
+  }
 }
 
 // Styles for OpenAir Reborn start here
@@ -114,6 +125,34 @@ $green: #a9dd2d;
       border: 1px solid rgb(170, 170, 170) !important;
     }
 
+    @media (max-width: 992px) {
+      .p2-row div.p2-input-wrapper {
+        width: 29.4%;
+        &.p2-date-wrapper .chosen-container {
+          width: 100% !important;
+        }
+        &.p2-button-wrapper {
+          clear: both;
+          display: block;
+          width: 100%;
+          input {
+            width: 100%;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .p2-row div.p2-input-wrapper {
+        width: 100% !important;
+        display: block;
+        .chosen-container,
+        input {
+          width: 100% !important;
+        }
+      }
+    }
   }
 
   .p2-table-wrapper {

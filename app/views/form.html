@@ -3,24 +3,24 @@
     <input placeholder="What are you working on?" type="text" ng-model="$parent.notes" class="p2-input p2-notes" />
 
     <div class="p2-row">
-        <div class="p2-input-wrapper p2-text">
+        <div class="p2-input-wrapper p2-text p2-hours-wrapper">
             <input placeholder="Hours" type="text" ng-model="$parent.time" class="p2-input" />
         </div>
-        <div class="p2-input-wrapper">
+        <div class="p2-input-wrapper p2-project-wrapper">
             <select chosen data-placeholder="Select a project..." ng-model="$parent.project" ng-change="updateTasks()" ng-options="k as v for (k, v) in projects" class="p2-project">
                 <option></option> <!-- necessary due to https://github.com/localytics/angular-chosen/issues/8 -->
             </select>
         </div>
-        <div class="p2-input-wrapper">
+        <div class="p2-input-wrapper p2-task-wrapper">
             <select chosen data-placeholder="Select a task..." ng-model="$parent.task" ng-options="k as v for (k, v) in tasks" class="p2-task">
                 <option></option> <!-- necessary due to https://github.com/localytics/angular-chosen/issues/8 -->
             </select>
         </div>
-        <div class="p2-input-wrapper">
+        <div class="p2-input-wrapper p2-date-wrapper">
             <select chosen data-placeholder="Date" multiple ng-model="$parent.when" ng-options="v.code as v.name for (k, v) in weekdays" class="p2-when">
             </select>
         </div>
-        <div class="p2-input-wrapper p2-text">
+        <div class="p2-input-wrapper p2-text p2-button-wrapper">
             <input type="submit" ng-click="addTime($event)" class="p2-submit" ng-value="submitButton" />
         </div>
     </div>

@@ -170,7 +170,7 @@ app.service('OpenAirService', function() {
         var taskCellId = 'ts_c2_' + rowNum;
         var jsString = "jQuery('#" + cellId + "').trigger('change');";
         jsString += "jQuery('#" + taskCellId + "').trigger('change');";
-        this.injectJs(jsString);
+        parent.injectJs(jsString);
 
         return cellId;
     };
@@ -183,6 +183,8 @@ app.service('OpenAirService', function() {
      */
     this.addHours = function(cellId, hours) {
         $('#' + cellId).val(hours);
+        var jsString = "jQuery('#" + cellId + "').trigger('change');";
+        parent.injectJs(jsString);
     };
 
     /**

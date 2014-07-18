@@ -47,7 +47,9 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
                 timerStart: 0
             };
 
-            if (!timeEntry.time) {
+            if (timeEntry.time) {
+                timeEntry.timerStart = timeEntry.time * 60 * 60 * 1000;
+            } else {
                 timeEntry.timing = true;
                 timeEntry.timerStarted = true;
             }
@@ -150,7 +152,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         angular.forEach(timeEntries, function(entry) {
             sum += parseFloat(entry.time);
         });
-        return sum;
+        return parseFloat(sum.toFixed(3));
     };
 
     /**
@@ -171,7 +173,6 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         }
         entry.timing = !entry.timing;
     };
-
 
     $scope.$on('timer-tick', function (event, data){
         var hours = data.millis / 1000 / 60 / 60;
@@ -236,6 +237,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     // Default the "Day" field to the current day.
     $scope.when = [$scope.getDay()];
 
+    // Update the submit button's value based on whether the time field has a vlue or not.
     $scope.$watch('time', function(newTime) {
         if (newTime) {
             $scope.submitButton = "Add";
