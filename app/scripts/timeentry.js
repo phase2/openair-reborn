@@ -39,7 +39,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             var timeEntry = {
                 time: $scope.time,
                 project: $scope.project,
-                projectName: OpenAirService.fetchProjects()[$scope.project].split(' : ')[1],
+                projectName: OpenAirService.fetchProjects()[$scope.project],
                 task: $scope.task,
                 taskName: OpenAirService.fetchTasks($scope.project)[$scope.task],
                 notes: $scope.notes,

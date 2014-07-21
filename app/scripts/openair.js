@@ -71,8 +71,7 @@ app.service('OpenAirService', function() {
         // to build our formatted "tasks" object and return it.
         $taskoptions.each(function () {
             if ($(this).text().length > 0 && $(this).val() !== "0") {
-                // Let's use a .split() to remove the useless number from the task's label.
-                var label = $(this).text().split(': ')[1];
+                var label = $(this).text();
                 tasks[$(this).val()] = label;
             }
         });
@@ -121,9 +120,9 @@ app.service('OpenAirService', function() {
             }
             var date = $(this).find('a').attr('data-additional-title').substring(0, 2).toLowerCase();
             var project = $(this).parents('tr').find('.timesheetControlPopupCustomerProject').val();
-            var projectName = projects[project].split(' : ')[1];
+            var projectName = projects[project];
             var task = $(this).parents('tr').find('.timesheetControlPopup').val();
-            var taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text().split(': ')[1];
+            var taskName = $(this).parents('tr').find('.timesheetControlPopup option:selected').text();
             var notesId = $(this).find('a').attr('data-additional-prefix');
             var notes = parent.findNotes(notesId);
             var id = $(this).find('input').attr('id');
