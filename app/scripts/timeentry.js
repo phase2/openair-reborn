@@ -189,7 +189,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
      * @param {Object} entry
      */
     $scope.toggleTimer = function(entry) {
-        var $timer = angular.element('.entryid-' + entry.id + ' timer')[0]
+        var $timer = angular.element('.entryid-' + entry.id + ' timer')[0];
 
         if (entry.timing) {
             $timer.stop();
