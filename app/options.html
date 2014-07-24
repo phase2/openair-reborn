@@ -29,7 +29,7 @@
             <form action="">
                 <div class="form-input-wrapper">
                     <label for="timeFormat">Time duration format</label>
-                    <select name="timeFormat" ng-model="timeFormat">
+                    <select id="timeFormat" name="timeFormat" ng-model="timeFormat">
                         <option value="hhmm">HH:MM (Example: 8:45)</option>
                         <option value="decimal">Decimal (Example: 8.75)</option>
                     </select>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-input-wrapper">
                     <label for="multipleTimers">Allow multiple timers</label>
-                    <select name="multipleTimers" ng-model="multipleTimers">
+                    <select id="multipleTimers"  name="multipleTimers" ng-model="multipleTimers">
                         <option value="1">Yes</option>
                         <option value="0">No</option>
                     </select>
@@ -45,14 +45,14 @@
                 </div>
                 <div class="form-input-wrapper">
                     <label for="persistentTimers">Persistent timers</label>
-                    <select name="persistentTimers" ng-model="persistentTimers">
+                    <select id="persistentTimers" name="persistentTimers" ng-model="persistentTimers">
                         <option value="1">On</option>
                         <option value="0">Off</option>
                     </select>
                     <p class="description">Choosing "Off" will stop all timers when the browser tab is closed, otherwise they will keep running.</p>
                 </div>
                 <div class="form-input-wrapper">
-                    <label for="submit">Submit</label>
+                    <label>Submit</label>
                     <input ng-click="save()" type="submit" value="Save" />
                     <input ng-click="saveAndClose()" type="submit" value="Save and close" />
                     <input ng-click="reset()" type="submit" value="Reset"/>
