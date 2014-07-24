@@ -1,6 +1,6 @@
 {
     "name": "__MSG_appName__",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {
@@ -23,8 +23,6 @@
             "19": "images/icon-19.png",
             "38": "images/icon-38.png"
         }
-        //"default_title": "OpenAir Reborn", // Uncomment these lines if we ever want to use the popup again.
-        //"default_popup": "popup.html"
     },
     "options_page": "options.html",
     "content_scripts": [
