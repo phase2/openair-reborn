@@ -9,7 +9,7 @@
  * @file An Angular controller used for managing the custom UI for OpenAir.
  */
 
-app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($scope, OpenAirService) {
+app.controller('TimeEntryController', ['$scope', '$timeout', 'OpenAirService', function($scope, $timeout, OpenAirService) {
 
     /**
      * Adds time to the list of time entries.
@@ -197,6 +197,13 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         var $timer = angular.element('.entryid-' + entry.id + ' timer')[0];
 
         if (entry.timing) {
+
+            if ($scope.persistentTimers) {
+                // Remove the timer from storage so that we know not to start it
+                // if the tab is closed and reopened.
+                $scope.removeRunningTimer(entry);
+            }
+
             $timer.stop();
 
         } else {
@@ -221,6 +228,12 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
                 // next time, we can resume instead of start over.
                 $timer.start();
                 entry.timerStarted = true;
+            }
+
+            if ($scope.persistentTimers) {
+                // Add the timer to storage so that we can start it back up if
+                // the tab is closed and reopened.
+                $scope.addRunningTimer(entry);
             }
         }
         entry.timing = !entry.timing; // Used by the template to know if the timer is active.
@@ -259,7 +272,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
      */
     $scope.loadSetting = function(optionName, defaultVal) {
         var exists = false;
-        chrome.storage.sync.get(optionName, function (obj) {
+        chrome.storage.sync.get(optionName, function(obj) {
             if (obj[optionName]) {
                 exists = true;
                 $scope[optionName] = obj[optionName];
@@ -278,6 +291,61 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         $scope.loadSetting('timeFormat', 'hhmm');
         $scope.loadSetting('multipleTimers', 1);
         $scope.loadSetting('persistentTimers', 1);
+    };
+
+    /**
+     * Load any and all running timers from persistent storage, if the "Persistent
+     * Timers" option is enabled.
+     */
+    $scope.loadInitialTimers = function() {
+        chrome.storage.sync.get('runningTimers', function(obj) {
+            if (obj['runningTimers']) {
+                $scope.runningTimers = obj['runningTimers'];
+                $scope.startInitialTimers();
+            } else {
+                $scope.runningTimers = [];
+            }
+        });
+    };
+
+    /**
+     * For each of the loaded initial timers, go ahead and start them.
+     */
+    $scope.startInitialTimers = function() {
+        angular.forEach($scope.runningTimers, function(entry, key) {
+            if (entry !== null) {
+
+                angular.forEach($scope.weekdays, function(weekday) {
+                    angular.forEach($scope.timeEntries[weekday.code], function(curEntry) {
+                        if (curEntry.id !== entry.id) {
+                            curEntry.timing = false;
+                            curEntry.autostart = true;
+                        }
+                    });
+                });
+            }
+        });
+        debugger;
+    }
+
+    /**
+     * If we're keeping persistent timers, this function adds a new timer to the list.
+     *
+     * @param {Object} entry
+     */
+    $scope.addRunningTimer = function(entry) {
+        $scope.runningTimers.push(entry);
+        chrome.storage.sync.set({'runningTimers': $scope.runningTimers});
+    };
+
+    /**
+     * If we're keeping persistent timers, this function removes a timer to the list.
+     *
+     * @param {Object} entry
+     */
+    $scope.removeRunningTimer = function(entry) {
+        delete $scope.runningTimers[entry.id];
+        chrome.storage.sync.set({'runningTimers': $scope.runningTimers});
     };
 
     /**
@@ -329,6 +397,9 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
     // Load in any user settings if saved, otherwise just load the defaults.
     $scope.loadSettings();
+
+    // This is used if the Persistent Timers option is enabled.
+    $scope.loadInitialTimers();
 
     // Update the submit button's value based on whether the time field has a vlue or not.
     $scope.$watch('time', function(newTime) {

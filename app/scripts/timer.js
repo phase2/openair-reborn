@@ -15,6 +15,7 @@ var timerModule = angular.module('timer', [])
             scope: {
                 interval: '=interval',
                 startTimeAttr: '=startTime',
+                stopTimeAttr: '=stoppedTime',
                 autoStart: '&autoStart',
                 maxTimeUnit: '='
             },
@@ -58,6 +59,7 @@ var timerModule = angular.module('timer', [])
                 }
 
                 $scope.start = $element[0].start = function () {
+                    debugger;
                     $scope.startTime = $scope.startTimeAttr ? $scope.startTimeAttr : 0;
                     resetTimeout();
                     tick($element);
@@ -65,8 +67,9 @@ var timerModule = angular.module('timer', [])
                 };
 
                 $scope.resume = $element[0].resume = function () {
+                    debugger;
                     resetTimeout();
-                    $scope.startTime = $scope.stoppedTime;
+                    $scope.startTime = $scope.stoppedTime || $scope.stopTimeAttr;
                     tick($element);
                     $scope.isRunning = true;
                 };
