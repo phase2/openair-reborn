@@ -120,7 +120,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
         angular.forEach($scope.timeEntries[day], function(entry) {
             if (entry.id === timeId) {
-                entry.time = hours.toFixed(3);
+                entry.time = hours;
                 OpenAirService.addHours(entry.id, hours);
                 return;
             }
@@ -152,17 +152,27 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     };
 
     /**
-     * Adds up all the time for a list of time entries.
+     * Adds up all the time for a list of time entries and displays in HH:MM format..
      *
      * @param {Array} timeEntries
-     * @returns {number} sum
+     * @returns {string}
      */
     $scope.sumTime = function(timeEntries) {
         var sum = 0;
         angular.forEach(timeEntries, function(entry) {
             sum += parseFloat(entry.time);
         });
-        return parseFloat(sum.toFixed(3));
+
+        // Now that we have a decimal number of hours, format it like HH:MM.
+        var hours = Math.floor(sum);
+        var minutes = Math.floor((sum % 1) * 60);
+
+        // Pad the minutes with a leading zero if needed.
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+
+        return hours + ":" + minutes;
     };
 
     /**

@@ -1,7 +1,7 @@
 <div class="p2-table-wrapper">
     <div ng-repeat="day in reverseWeekdays">
         <div ng-show="timeEntries[day.code]">
-            <h2>{{day.name}} ({{sumTime(timeEntries[day.code])}} hours)</h2>
+            <h2>{{day.name}} ({{sumTime(timeEntries[day.code])}})</h2>
             <table cellpadding="0" cellspacing="0">
                 <tr class="entryid-{{entry.id}}" ng-class="{timing: entry.timing}" ng-repeat="entry in timeEntries[day.code] | orderBy : 'projectName'">
                     <td class="p2-time">
