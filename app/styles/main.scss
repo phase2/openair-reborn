@@ -2,6 +2,54 @@ $lightblue: #99cee7;
 $lightgray: #f4f2ed;
 $green: #a9dd2d;
 
+// Styles for the options page only.
+.oa-reborn-options-page {
+  font-family: 'Open Sans', sans-serif;
+  width: 550px;
+  margin: 40px auto;
+  * {
+    box-sizing: border-box;
+  }
+  h1 {
+    background: transparent url(http://i.imgur.com/aSMH6aL.png) no-repeat left center;
+    font-size: 40px;
+    padding-left: 2em;
+    font-weight: 300;
+    background-size: contain;
+    margin-bottom: 40px;
+  }
+  .form-input-wrapper {
+    margin: 40px 0;
+  }
+  label {
+    display: block;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 16px;
+    color: #888;
+    float: left;
+    width: 50%;
+  }
+  .description {
+    font-size: 12px;
+  }
+  input[type=text] {
+    width: 100%;
+    padding: 5px;
+  }
+  .status {
+    padding: 15px;
+    background: #d3ffe0;
+    color: #555;
+  }
+  select {
+    padding: 5px;
+  }
+  input, select {
+    font-size: 16px;
+  }
+}
+
 // Miscellaneous OpenAir fixes start here
 .timesheet td.formButtonBar #save_grid_submit {
   margin-right: 10px !important;
