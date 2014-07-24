@@ -263,7 +263,6 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             if (obj[optionName]) {
                 exists = true;
                 $scope[optionName] = obj[optionName];
-                $scope.$apply();
             }
         });
         if (!exists) {
@@ -277,7 +276,6 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     $scope.loadSettings = function() {
         $scope.loadSetting('timeFormat', 'hhmm');
         $scope.loadSetting('multipleTimers', 1);
-        $scope.loadSetting('persistentTimers', 1);
     };
 
     /**
@@ -338,6 +336,10 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             $scope.submitButton = "Start";
         }
     });
+
+    if (document.URL.indexOf('MESSAGE') === -1) {
+        chrome.storage.sync.set({ timesheetUrl : document.URL });
+    }
 
     /**
      * Adds an "Enter" key listener to submit the form on Enter press

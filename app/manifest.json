@@ -9,7 +9,8 @@
     },
     "default_locale": "en",
     "permissions": [
-        "storage"
+        "storage",
+        "tabs"
     ],
     "background": {
         "scripts": [
@@ -21,9 +22,9 @@
         "default_icon": {
             "19": "images/icon-19.png",
             "38": "images/icon-38.png"
-        },
-        "default_title": "OpenAir Reborn",
-        "default_popup": "popup.html"
+        }
+        //"default_title": "OpenAir Reborn", // Uncomment these lines if we ever want to use the popup again.
+        //"default_popup": "popup.html"
     },
     "options_page": "options.html",
     "content_scripts": [
