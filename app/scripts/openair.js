@@ -118,6 +118,9 @@ app.service('OpenAirService', function() {
                 // This one's empty, so skip it.
                 return;
             }
+
+            // Here be dragons. There are a few funky selectors here. OpenAir definitely
+            // didn't throw us any bones.
             var date = $(this).find('a').attr('data-additional-title').substring(0, 2).toLowerCase();
             var project = $(this).parents('tr').find('.timesheetControlPopupCustomerProject').val();
             var projectName = projects[project];
@@ -275,7 +278,7 @@ app.service('OpenAirService', function() {
      *
      * Cells are all in the format "ts_c<column>_r<row>" so we just replace
      * the column with the one for the day and the rest stays the same as the
-     * project dropdown iD.
+     * project dropdown ID.
      *
      * @param {string} projectCellId
      * @param {int} day
@@ -354,6 +357,8 @@ app.service('OpenAirService', function() {
 
     /**
      * Helper function to convert two digit day code to integer.
+     *
+     * @TODO: Start using numbers instead of day codes. It'll remove a lot of dumb logic.
      *
      * @param {string} dayCode
      * @returns {int}

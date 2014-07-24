@@ -12,14 +12,6 @@
 app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($scope, OpenAirService) {
 
     /**
-     * Updates $scope.tasks once the value of $scope.project has been changed.
-     */
-    $scope.updateTasks = function() {
-        var tasks = OpenAirService.fetchTasks($scope.project);
-        $scope.tasks = tasks;
-    };
-
-    /**
      * Adds time to the list of time entries.
      */
     $scope.addTime = function(e) {
@@ -32,9 +24,11 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         }
 
         if ($scope.when === "" || typeof $scope.when === "undefined" || $scope.when.length === 0) {
+            // If the "Day" field is empty, we just use the current day.
             $scope.when = [$scope.getDay()];
         }
 
+        // Need a forEach because adding time to multiple days at once is supported.
         angular.forEach($scope.when, function(day) {
             var timeEntry = {
                 time: $scope.time,
@@ -48,22 +42,32 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             };
 
             if (timeEntry.time) {
+                // If the "time" field has a value, then we are NOT starting
+                // a timer right now, so just set the entry's "timerStart" to be
+                // the number of milliseconds in the entry, so that if/when we
+                // do start a timer, we will be ready for it.
                 timeEntry.timerStart = timeEntry.time * 60 * 60 * 1000;
             } else {
+                // Or, if the "time" field is empty, then we ARE starting a timer
+                // right now, so go ahead and set that up.
                 timeEntry.timing = true;
                 timeEntry.timerStarted = true;
             }
 
             if (!$scope.timeEntries[day]) {
+                // This is the first time entry for this day, so create the container.
                 $scope.timeEntries[day] = [];
             }
 
+            // Add the time to the OA time grid, and grab the cell's ID so
+            // that we have it for later editing, deletion, etc.
             timeEntry.id = OpenAirService.addTime(timeEntry);
             $scope.timeEntries[day].push(timeEntry);
 
-            $scope.$apply();
+            $scope.$apply(); // @TODO: Is this still needed?
 
             if (timeEntry.timing) {
+                // Start the timer if needed.
                 angular.element('.entryid-' + timeEntry.id + ' timer')[0].start();
             }
         });
@@ -95,9 +99,13 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     };
 
     /**
-     * Edit the hours for a specific time entry. Used by the timer.
+     * Edit the hours for a specific existing time entry. Used by the timer.
      *
-     * @TODO: Clean up this horrible, horrible function.
+     * This function runs every second while a timer is running, so it should
+     * be as performant as possible.
+     *
+     * @TODO: Clean up this horrible, horrible function, and don't use a
+     * forEach just to find and update 1 time entry.
      *
      * @param timeId
      * @param hours
@@ -127,9 +135,11 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
      */
     $scope.deleteTime = function(entry, day, edit) {
         if (!edit && !confirm('Are you sure you want to delete that time entry?')) {
+            // Only ask for confirmation if we're really deleting instead of editing.
             return;
         }
         var entries = $scope.timeEntries[day];
+        // Remove the chosen time entry from $scope.timeEntries.
         $scope.timeEntries[day] = entries.filter(function(element) {
             if (element.id === entry.id) {
                 return false;
@@ -137,7 +147,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             return true;
         });
 
-        // Now that it's deleted from $scope, also remove it from the OA grid.
+        // Now that it's deleted from $scope.timeEntries, also remove it from the OA grid.
         OpenAirService.deleteTime(entry.id);
     };
 
@@ -156,24 +166,38 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     };
 
     /**
+     * Updates $scope.tasks once the value of $scope.project has been changed.
+     */
+    $scope.updateTasks = function() {
+        var tasks = OpenAirService.fetchTasks($scope.project);
+        $scope.tasks = tasks;
+    };
+
+    /**
      * Toggles a timer for a given time entry object.
      *
      * @param {Object} entry
      */
     $scope.toggleTimer = function(entry) {
+        var $timer = angular.element('.entryid-' + entry.id + ' timer')[0]
+
         if (entry.timing) {
-            angular.element('.entryid-' + entry.id + ' timer')[0].stop();
+            $timer.stop();
         } else {
             if (entry.timerStarted) {
-                angular.element('.entryid-' + entry.id + ' timer')[0].resume();
+                $timer.resume();
             } else {
-                angular.element('.entryid-' + entry.id + ' timer')[0].start();
+                // This is the first time this timer has been started, so we
+                // so we need to set timerStarted to true so that we know that
+                // next time, we can resume instead of start over.
+                $timer.start();
                 entry.timerStarted = true;
             }
         }
-        entry.timing = !entry.timing;
+        entry.timing = !entry.timing; // Used by the template to know if the timer is active.
     };
 
+    // Called each time the timer "ticks" or changes, which is every second in our case.
     $scope.$on('timer-tick', function (event, data){
         var hours = data.millis / 1000 / 60 / 60;
         $scope.editHours(data.cellId, hours);
@@ -182,6 +206,8 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
     /**
      * Return the 2 letter code of the current date.
+     *
+     * @TODO: Start using numbers instead of day codes. It'll remove a lot of dumb logic.
      *
      * @returns {String}
      */
@@ -195,7 +221,8 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
      * Simple conversion function, since we are using two letter
      * date codes instead of numbers.
      *
-     * @TODO: Start using numbers. It'll remove a lot of dumb logic.
+     * @TODO: Start using numbers instead of day codes. It'll remove a lot of dumb logic.
+     *
      * @returns {Array}
      */
     $scope.getDaysArray = function() {

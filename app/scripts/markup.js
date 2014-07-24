@@ -8,6 +8,7 @@ var app = angular.module('OpenAirReborn',['localytics.directives', 'timer']);
 function addInitialMarkup() {
     var $timesheet = $('#timesheet_grid');
     if ($timesheet.length < 1) {
+        // We are not on a timesheet, so shut it down!
         return;
     }
 
@@ -20,8 +21,8 @@ function addInitialMarkup() {
     url = chrome.extension.getURL('views/table.html');
     $app.append('<div ng-include src="\'' + url + '\'"></div>');
 
-    $content.append($app);
-    $timesheet.after($content);
+    $content.append($app); // Finalize our custom markup string.
+    $timesheet.after($content); // Add our custom markup to the page itself.
 }
 
 /**

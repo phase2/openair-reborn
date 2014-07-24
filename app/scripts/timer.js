@@ -2,6 +2,10 @@
 
 /**
  * Hacked version of https://github.com/siddii/angular-timer v1.1.6
+ *
+ * Had to hack it to make it support passing in a pre-passed time duration
+ * instead of a original start time, which made things a lot more complicated.
+ * Also removed a lot of stuff we don't need, such as countdowns and end times.
  */
 var timerModule = angular.module('timer', [])
     .directive('timer', ['$compile', function ($compile) {
