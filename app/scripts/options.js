@@ -2,6 +2,7 @@
 
 /*global angular:false */
 
+// @TODO: Remove localytics if we don't end up using Chosen for any settings.
 var app = angular.module('OpenAirRebornOptions',['localytics.directives']);
 
 app.controller('OptionsController', ['$scope', function($scope) {
@@ -11,10 +12,9 @@ app.controller('OptionsController', ['$scope', function($scope) {
      */
     $scope.save = function() {
         chrome.storage.sync.set({
-            dayTimeFormat : $scope.dayTimeFormat,
+            timeFormat : $scope.timeFormat,
             multipleTimers : $scope.multipleTimers,
-            persistentTimers : $scope.persistentTimers,
-            enableTimers : $scope.enableTimers
+            persistentTimers : $scope.persistentTimers
         }, function() {
             $scope.status = "Settings saved successfully.";
             $scope.$apply();
@@ -64,10 +64,9 @@ app.controller('OptionsController', ['$scope', function($scope) {
      * Set up starter values for each of the fields in our form.
      */
     $scope.initialize = function() {
-        $scope.load('dayTimeFormat', 'hhmm');
+        $scope.load('timeFormat', 'hhmm');
         $scope.load('multipleTimers', 1);
         $scope.load('persistentTimers', 1);
-        $scope.load('enableTimers', 1);
     };
 
     // And away we go...

@@ -163,6 +163,11 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             sum += parseFloat(entry.time);
         });
 
+        if ($scope.timeFormat === 'decimal') {
+            // Cut out early if the user chose decimal time format instead of HH:MM.
+            return parseFloat(sum.toFixed(3));
+        }
+
         // Now that we have a decimal number of hours, format it like HH:MM.
         var hours = Math.floor(sum);
         var minutes = Math.floor((sum % 1) * 60);
@@ -193,7 +198,21 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
         if (entry.timing) {
             $timer.stop();
+
         } else {
+
+            if ($scope.multipleTimers === "0") {
+                // The user has chosen to not allow multiple timers to be running at once
+                // so we need to disable all currently running timers before starting this timer.
+                angular.forEach($scope.weekdays, function(weekday) {
+                    angular.forEach($scope.timeEntries[weekday.code], function(curEntry) {
+                        if (curEntry.timing && curEntry.id !== entry.id) {
+                            $scope.toggleTimer(curEntry);
+                        }
+                    });
+                });
+            }
+
             if (entry.timerStarted) {
                 $timer.resume();
             } else {
@@ -211,7 +230,11 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     $scope.$on('timer-tick', function (event, data){
         var hours = data.millis / 1000 / 60 / 60;
         $scope.editHours(data.cellId, hours);
-        $scope.$apply();
+
+        if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') {
+            // This is needed to get the daily time totals to stay up to date.
+            $scope.$apply();
+        }
     });
 
     /**
@@ -225,6 +248,36 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         var date = new Date();
         var weekdays = $scope.getDaysArray();
         return weekdays[date.getDay()];
+    };
+
+    /**
+     * Attempt to load a saved setting, and if it doesn't exist, then just
+     * initialize it from the passed in default value instead.
+     *
+     * @param {string} optionName
+     * @param {mixed} defaultVal
+     */
+    $scope.loadSetting = function(optionName, defaultVal) {
+        var exists = false;
+        chrome.storage.sync.get(optionName, function (obj) {
+            if (obj[optionName]) {
+                exists = true;
+                $scope[optionName] = obj[optionName];
+                $scope.$apply();
+            }
+        });
+        if (!exists) {
+            $scope[optionName] = defaultVal;
+        }
+    };
+
+    /**
+     * Set up starter values for each of the fields in our form.
+     */
+    $scope.loadSettings = function() {
+        $scope.loadSetting('timeFormat', 'hhmm');
+        $scope.loadSetting('multipleTimers', 1);
+        $scope.loadSetting('persistentTimers', 1);
     };
 
     /**
@@ -273,6 +326,9 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
     // Default the "Day" field to the current day.
     $scope.when = [$scope.getDay()];
+
+    // Load in any user settings if saved, otherwise just load the defaults.
+    $scope.loadSettings();
 
     // Update the submit button's value based on whether the time field has a vlue or not.
     $scope.$watch('time', function(newTime) {

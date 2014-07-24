@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
     <head>
+        <title>OpenAir Reborn Settings</title>
         <!-- bower:css -->
         <!-- endbower -->
 
@@ -23,27 +24,18 @@
     <body ng-app="OpenAirRebornOptions">
         <div class="oa-reborn-options-page" ng-controller="OptionsController">
             <h1>OpenAir Reborn Options</h1>
-            <h2>NOTE: These options currently do nothing.</h2>
             <p class="status" ng-show="status">{{status}}</p>
 
             <form action="">
                 <div class="form-input-wrapper">
-                    <label for="dayTimeFormat">Time duration format</label>
-                    <select name="dayTimeFormat" ng-model="dayTimeFormat">
+                    <label for="timeFormat">Time duration format</label>
+                    <select name="timeFormat" ng-model="timeFormat">
                         <option value="hhmm">HH:MM (Example: 8:45)</option>
                         <option value="decimal">Decimal (Example: 8.75)</option>
                     </select>
                     <p class="description">This is used to determine how daily and weekly totals are displayed.</p>
                 </div>
                 <div class="form-input-wrapper">
-                    <label for="enableTimers">Enable timers</label>
-                    <select name="enableTimers" ng-model="enableTimers">
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                    </select>
-                    <p class="description">Choosing "No" will turn off and hide all timer functionality.</p>
-                </div>
-                <div ng-show="enableTimers" class="form-input-wrapper">
                     <label for="multipleTimers">Allow multiple timers</label>
                     <select name="multipleTimers" ng-model="multipleTimers">
                         <option value="1">Yes</option>
@@ -51,7 +43,7 @@
                     </select>
                     <p class="description">Choosing "No" will automatically stop a running timer whenever a new one is started.</p>
                 </div>
-                <div ng-show="enableTimers" class="form-input-wrapper">
+                <div class="form-input-wrapper">
                     <label for="persistentTimers">Persistent timers</label>
                     <select name="persistentTimers" ng-model="persistentTimers">
                         <option value="1">On</option>
