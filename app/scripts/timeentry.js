@@ -93,7 +93,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         $scope.project = entry.project;
         $scope.tasks = OpenAirService.fetchTasks(entry.project);
         $scope.task = entry.task;
-        $scope.time = entry.time;
+        $scope.time = entry.time.toFixed(3);
         $scope.when = [day];
         $scope.deleteTime(entry, day, true);
         angular.element('body').scrollTop(0);
