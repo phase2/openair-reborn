@@ -96,6 +96,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         $scope.time = entry.time;
         $scope.when = [day];
         $scope.deleteTime(entry, day, true);
+        angular.element('body').scrollTop(0);
     };
 
     /**
