@@ -5,7 +5,7 @@ a nice, keyboard-powered, Toggl-esque interface.
 
 ### Installation
 
-Download it from the Chrome Webstore. (Link coming soon!)
+Download it [from the Chrome Webstore](https://chrome.google.com/webstore/detail/openair-reborn/ajmdofceiiflcdlclkicifcnccdgkcmb).
 
 ### How to contribute
 
