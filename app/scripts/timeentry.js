@@ -187,6 +187,10 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     $scope.updateTasks = function() {
         var tasks = OpenAirService.fetchTasks($scope.project);
         $scope.tasks = tasks;
+        if (Object.keys(tasks).length === 1) {
+            // If there's only one task, go ahead and select it.
+            $scope.task = Object.keys(tasks)[0];
+        }
     };
 
     /**
