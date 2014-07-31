@@ -64,7 +64,10 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             timeEntry.id = OpenAirService.addTime(timeEntry);
             $scope.timeEntries[day].push(timeEntry);
 
-            $scope.$apply(); // @TODO: Is this still needed?
+            // @TODO: Is this still needed?
+            if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') {
+                $scope.$apply();
+            }
 
             if (timeEntry.timing) {
                 // Start the timer if needed.
