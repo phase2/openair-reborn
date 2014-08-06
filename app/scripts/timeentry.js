@@ -308,14 +308,16 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
     // Days of the week, to match code to day and cycle through in the view.
     $scope.weekdays = [
-        {code: "mo", name: 'Monday', shortName: 'Mo'},
-        {code: "tu", name: 'Tuesday', shortName: 'Tu'},
-        {code: "we", name: 'Wednesday', shortName: 'We'},
-        {code: "th", name: 'Thursday', shortName: 'Th'},
-        {code: "fr", name: 'Friday', shortName: 'Fr'},
-        {code: "sa", name: 'Saturday', shortName: 'Sa'},
-        {code: "su", name: 'Sunday', shortName: 'Su'}
+        {code: "mo", name: 'Monday', shortName: 'Mo', timestamp: OpenAirService.getDateTimestamp("mo")},
+        {code: "tu", name: 'Tuesday', shortName: 'Tu', timestamp: OpenAirService.getDateTimestamp("tu")},
+        {code: "we", name: 'Wednesday', shortName: 'We', timestamp: OpenAirService.getDateTimestamp("we")},
+        {code: "th", name: 'Thursday', shortName: 'Th', timestamp: OpenAirService.getDateTimestamp("th")},
+        {code: "fr", name: 'Friday', shortName: 'Fr', timestamp: OpenAirService.getDateTimestamp("fr")},
+        {code: "sa", name: 'Saturday', shortName: 'Sa', timestamp: OpenAirService.getDateTimestamp("sa")},
+        {code: "su", name: 'Sunday', shortName: 'Su', timestamp: OpenAirService.getDateTimestamp("su")}
     ];
+
+    $scope.isPreviousWeek = OpenAirService.getDateTimestamp("mo") < (Date.now() - (7 * 1000 * 60 * 60 * 24));
 
     // The time table is listed in reverse order.
     // @TODO: Use a filter instead.

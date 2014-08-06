@@ -374,4 +374,16 @@ app.service('OpenAirService', function() {
         weekdays.su = 6;
         return weekdays[dayCode];
     };
+
+    /**
+     * Gets the timestamp of a date in this timesheet, given the 2 letter day code.
+     * @param {string} dayCode
+     * @returns {number}
+     */
+    this.getDateTimestamp = function(dayCode) {
+        var dayNum = parent.getDayNum(dayCode);
+        var weekStart = Date.parse($('.aht_middle').text().split(" ")[0]);
+        var dayTimestamp = weekStart + (dayNum * 1000 * 60 * 60 * 24);
+        return dayTimestamp;
+    }
 });
