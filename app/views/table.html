@@ -2,7 +2,7 @@
     <div class="error" ng-show="isPreviousWeek">You're editing a previous week's timesheet!</div>
     <div ng-repeat="day in reverseWeekdays">
         <div ng-show="timeEntries[day.code].length > 0">
-            <h2>{{day.name}} <span ng-show="day.timestamp > 0">{{day.timestamp | date:'shortDate'}}</span> ({{sumTime(timeEntries[day.code])}})</h2>
+            <h2>{{day.name}} ({{sumTime(timeEntries[day.code])}})</h2>
             <table cellpadding="0" cellspacing="0">
                 <tr class="entryid-{{entry.id}}" ng-class="{timing: entry.timing}" ng-repeat="entry in timeEntries[day.code] | orderBy : 'projectName'">
                     <td class="p2-time">
