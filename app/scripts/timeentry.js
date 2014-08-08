@@ -351,6 +351,24 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         chrome.storage.sync.set({ timesheetUrl : document.URL });
     }
 
+    OpenAirService.addPreviewButton();
+
+    angular.element('#p2_preview').click(function(e) {
+        e.preventDefault();
+        angular.element('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned').toggle();
+        var $button = angular.element(e.target);
+        if ($button.text() === 'Preview') {
+            $button.text('Edit');
+        } else {
+            $button.text('Preview');
+            // We're going back to our time table away from OA's time grid, which means some changes may have
+            // been made to the time grid directly, so we need to update our time list to pick them up.
+            $scope.timeEntries = OpenAirService.parseTimesheet();
+            $scope.$apply();
+        }
+    });
+
+
     /**
      * Adds an "Enter" key listener to submit the form on Enter press
      * if the fields have been filled out.

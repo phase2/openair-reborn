@@ -26,23 +26,4 @@ function addInitialMarkup() {
     $timesheet.after($content); // Add our custom markup to the page itself.
 }
 
-/**
- * @TODO: Convert to Angular magic instead of jQuery dookie.
- */
-function addPreviewButton() {
-    $('#timesheet_savebutton').insertBefore('#save_grid_submit');
-    $('<button id="p2_preview" class="btn-oa">Preview</button>').insertAfter('#timesheet_savebutton');
-
-    $('#p2_preview').click(function (e) {
-        e.preventDefault();
-        $('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned').toggle();
-        if ($(this).text() === 'Preview') {
-            $(this).html('Edit');
-        } else {
-            $(this).html('Preview');
-        }
-    });
-}
-
 addInitialMarkup();
-addPreviewButton();

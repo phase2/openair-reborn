@@ -51,13 +51,21 @@ $green: #a9dd2d;
 }
 
 // Miscellaneous OpenAir fixes start here
-.timesheet td.formButtonBar #save_grid_submit {
-  margin-right: 10px !important;
+table.timesheet {
+  margin-top: 0 !important;
+}
+#timesheet_grid {
+  margin-top: 15px !important;
+}
+.timesheet {
+  td.formButtonBar #save_grid_submit {
+    margin-right: 10px !important;
+  }
+  td.formButtonBarOnFullScreen {
+     padding-right: 10% !important;
+  }
 }
 
-.timesheet td.formButtonBarOnFullScreen {
-  padding-right: 10% !important;
-}
 
 @media (max-width: 768px) {
   #save_grid_submit {
@@ -71,7 +79,10 @@ $green: #a9dd2d;
 }
 
 // Styles for OpenAir Reborn start here
-#timesheet_grid, .timesheetPinned, #timesheet_header_lower {
+.timesheetPinned,
+#timesheet_grid,
+#timesheet_header,
+#timesheet_header_lower {
   display: none;
 }
 

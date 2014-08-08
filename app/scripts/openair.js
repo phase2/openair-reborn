@@ -356,6 +356,18 @@ app.service('OpenAirService', function() {
     };
 
     /**
+     * Adds the "Preview" button to the make and makes it work.
+     * This is regular old jQuery because the button goes outside our Angular app's container div, so we
+     * can't easily touch it with Angular magic.
+     *
+     * @TODO: Convert to Angular magic instead of jQuery dookie.
+     */
+    this.addPreviewButton = function() {
+        $('#timesheet_savebutton').insertBefore('#save_grid_submit');
+        $('<button id="p2_preview" class="btn-oa">Preview</button>').insertAfter('#timesheet_savebutton');
+    };
+
+    /**
      * Helper function to convert two digit day code to integer.
      *
      * @TODO: Start using numbers instead of day codes. It'll remove a lot of dumb logic.
