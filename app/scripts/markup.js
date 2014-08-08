@@ -12,10 +12,11 @@ function addInitialMarkup() {
         return;
     }
 
+    // Build the wrapper divs
     var $content = $('<div id="p2_content" ng-app="OpenAirReborn" ng-csp></div>');
     var $app = $('<div ng-controller="TimeEntryController" class="oa_reborn_wrapper"></div>');
 
-    // Add the partials
+    // Build the partials
     var url = chrome.extension.getURL('views/form.html');
     $app.append('<div ng-include src="\'' + url + '\'"></div>');
     url = chrome.extension.getURL('views/table.html');

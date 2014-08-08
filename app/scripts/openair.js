@@ -383,7 +383,10 @@ app.service('OpenAirService', function() {
     this.getDateTimestamp = function(dayCode) {
         var dayNum = parent.getDayNum(dayCode);
         var weekStart = Date.parse($('.aht_middle').text().split(" ")[0]);
+        if (typeof weekStart !== "number" || weekStart === 0) {
+            return 0;
+        }
         var dayTimestamp = weekStart + (dayNum * 1000 * 60 * 60 * 24);
         return dayTimestamp;
-    }
+    };
 });
