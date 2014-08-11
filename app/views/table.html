@@ -1,5 +1,4 @@
 <div class="p2-table-wrapper">
-    <div class="error" ng-show="isPreviousWeek">You're editing a previous week's timesheet!</div>
     <div ng-repeat="day in reverseWeekdays">
         <div ng-show="timeEntries[day.code].length > 0">
             <h2>{{day.name}} ({{sumTime(timeEntries[day.code])}})</h2>

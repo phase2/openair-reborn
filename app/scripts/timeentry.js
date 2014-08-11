@@ -317,8 +317,6 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         {code: "su", name: 'Sunday', shortName: 'Su', timestamp: OpenAirService.getDateTimestamp("su")}
     ];
 
-    $scope.isPreviousWeek = OpenAirService.getDateTimestamp("mo") < (Date.now() - (7 * 1000 * 60 * 60 * 24));
-
     // The time table is listed in reverse order.
     // @TODO: Use a filter instead.
     $scope.reverseWeekdays = $scope.weekdays.reverse();
