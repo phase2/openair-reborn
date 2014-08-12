@@ -79,9 +79,10 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
         // on the next entry. The other variables can stay in case they will be
         // repeated, to save repetitive entry.
         $scope.notes = '';
+        $scope.time = '';
 
         // Finally, trigger the notes field again for rapid-fire entry.
-        angular.element('.p2-notes').trigger('focus');
+        angular.element('.p2-time-input').trigger('focus');
     };
 
     /**
@@ -351,6 +352,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
     OpenAirService.addPreviewButton();
 
+    // Add the click handler to the preview button.
     angular.element('#p2_preview').click(function(e) {
         e.preventDefault();
         angular.element('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned').toggle();
@@ -365,7 +367,6 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             $scope.$apply();
         }
     });
-
 
     /**
      * Adds an "Enter" key listener to submit the form on Enter press

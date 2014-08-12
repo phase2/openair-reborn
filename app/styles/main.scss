@@ -136,8 +136,16 @@ table.timesheet {
       }
     }
 
+    .p2-notes-input {
+      width: 88.5%;
+      float: right;
+    }
+    .p2-time-input {
+      width: 10%;
+    }
+
     .p2-row div.p2-input-wrapper {
-      width: 26%;
+      width: 29.5%;
       display: inline-block;
       margin-top: 20px;
       input {
@@ -184,10 +192,27 @@ table.timesheet {
       border: 1px solid rgb(170, 170, 170) !important;
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1024px) {
       .p2-row div.p2-input-wrapper {
-        width: 29.4%;
+        width: 28%;
         &.p2-date-wrapper .chosen-container {
+          width: 100% !important;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .p2-time-input {
+        width: 25% !important;
+      }
+      .p2-notes-input {
+        width: 71% !important;
+      }
+      .p2-row div.p2-input-wrapper {
+        width: 100% !important;
+        display: block;
+        .chosen-container,
+        input {
           width: 100% !important;
         }
         &.p2-button-wrapper {
@@ -198,17 +223,6 @@ table.timesheet {
             width: 100%;
             margin-left: 0;
           }
-        }
-      }
-    }
-
-    @media (max-width: 768px) {
-      .p2-row div.p2-input-wrapper {
-        width: 100% !important;
-        display: block;
-        .chosen-container,
-        input {
-          width: 100% !important;
         }
       }
     }

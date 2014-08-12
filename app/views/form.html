@@ -1,11 +1,9 @@
 <div class="p2-form-wrapper">
 
-    <input placeholder="What are you working on?" type="text" ng-model="$parent.notes" class="p2-input p2-notes" />
+    <input placeholder="Hours" type="text" ng-model="$parent.time" class="p2-input p2-time-input" />
+    <input placeholder="What are you working on?" type="text" ng-model="$parent.notes" class="p2-input p2-notes-input" />
 
     <div class="p2-row">
-        <div class="p2-input-wrapper p2-text p2-hours-wrapper">
-            <input placeholder="Hours" type="text" ng-model="$parent.time" class="p2-input" />
-        </div>
         <div class="p2-input-wrapper p2-project-wrapper">
             <select chosen data-placeholder="Select a project..." ng-model="$parent.project" ng-change="updateTasks()" ng-options="k as v for (k, v) in projects" class="p2-project">
                 <option></option> <!-- necessary due to https://github.com/localytics/angular-chosen/issues/8 -->
