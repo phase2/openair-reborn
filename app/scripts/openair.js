@@ -348,13 +348,13 @@ app.service('OpenAirService', function() {
      */
     this.getDayNum = function(dayCode) {
         var  weekdays = [];
-        weekdays.mo = 0;
-        weekdays.tu = 1;
-        weekdays.we = 2;
-        weekdays.th = 3;
-        weekdays.fr = 4;
-        weekdays.sa = 5;
-        weekdays.su = 6;
+	    weekdays.su = 0;
+        weekdays.mo = 1;
+        weekdays.tu = 2;
+        weekdays.we = 3;
+        weekdays.th = 4;
+        weekdays.fr = 5;
+        weekdays.sa = 6;
         return weekdays[dayCode];
     };
 });
