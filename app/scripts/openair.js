@@ -310,7 +310,7 @@ app.service('OpenAirService', function() {
                 }
             });
         });
-        return notes;
+        return notes.replace(/&#39;/g, "'"); // Decode single quotes from OpenAir.
     };
 
     /**
