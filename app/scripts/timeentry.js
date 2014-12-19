@@ -63,6 +63,8 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             // that we have it for later editing, deletion, etc.
             timeEntry.id = OpenAirService.addTime(timeEntry);
             $scope.timeEntries[day].push(timeEntry);
+            $scope.totalTime = OpenAirService.fetchWeekTime();
+            $scope.sumProjectTime();
 
             // @TODO: Is this still needed?
             if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') {
@@ -130,6 +132,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
                 return;
             }
         });
+        $scope.totalTime = OpenAirService.fetchWeekTime();
     };
 
     /**
@@ -154,6 +157,8 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
         // Now that it's deleted from $scope.timeEntries, also remove it from the OA grid.
         OpenAirService.deleteTime(entry.id);
+        $scope.totalTime = OpenAirService.fetchWeekTime();
+        $scope.sumProjectTime();
     };
 
     /**
@@ -173,9 +178,30 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
             return parseFloat(sum.toFixed(3));
         }
 
+        return $scope.decimalToTime(sum);
+    };
+
+    /**
+     * Build an array of total time, keyed by projects.
+     *
+     * @returns {array}
+     */
+    $scope.sumProjectTime = function() {
+        $scope.projectTime = {};
+        angular.forEach($scope.weekdays, function(weekday) {
+            angular.forEach($scope.timeEntries[weekday.code], function(curEntry) {
+                if (!$scope.projectTime[curEntry.projectName]) {
+                    $scope.projectTime[curEntry.projectName] = 0;
+                }
+                $scope.projectTime[curEntry.projectName] += parseFloat(curEntry.time);
+            });
+        });
+    };
+
+    $scope.decimalToTime = function(time) {
         // Now that we have a decimal number of hours, format it like HH:MM.
-        var hours = Math.floor(sum);
-        var minutes = Math.floor((sum % 1) * 60);
+        var hours = Math.floor(time);
+        var minutes = Math.floor((time % 1) * 60);
 
         // Pad the minutes with a leading zero if needed.
         if (minutes < 10) {
@@ -330,6 +356,12 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
 
     // Initialize the time entries by grabbing them out of the OpenAir grid.
     $scope.timeEntries = OpenAirService.parseTimesheet();
+    $scope.totalTime = OpenAirService.fetchWeekTime();
+
+    // The total time for each project.
+    $scope.projectTime = {};
+    $scope.sumProjectTime();
+    $scope.showTotals = false;
 
     // Default the "Day" field to the current day.
     $scope.when = [$scope.getDay()];
@@ -337,7 +369,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     // Load in any user settings if saved, otherwise just load the defaults.
     $scope.loadSettings();
 
-    // Update the submit button's value based on whether the time field has a vlue or not.
+    // Update the submit button's value based on whether the time field has a value or not.
     $scope.$watch('time', function(newTime) {
         if (newTime) {
             $scope.submitButton = "Add";

@@ -79,6 +79,20 @@ app.service('OpenAirService', function() {
     };
 
     /**
+     * Fetchs the sum of all time for the current week and returns it.
+     *
+     * @returns {float} hours
+     */
+    this.fetchWeekTime = function() {
+        var weekTime = $('.timesheetTotal').last().text();
+        if (!weekTime) {
+            // No entries for this week yet.
+            weekTime = 0;
+        }
+        return parseFloat(weekTime);
+    };
+
+    /**
      * Creates a new row at the end of the timesheet for a given project and
      * triggers a click on it so that the task dropdown populates.
      *

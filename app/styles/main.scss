@@ -103,6 +103,14 @@ table.timesheet {
     clear: both;
     overflow: visible;
 
+    h1.total-time {
+      float: right;
+      background: $lightgray;
+      margin-top: 19px;
+      margin-right: -20px;
+      padding: 10px 20px;
+    }
+
     .p2-input,
     .chosen-single,
     .chosen-container-multi .chosen-choices {
@@ -238,6 +246,27 @@ table.timesheet {
       background: #fc0;
       padding: 15px;
       width: 95%;
+    }
+    .p2-totals {
+      cursor: pointer;
+      &:hover {
+        background: $lightgray;
+      }
+      h2 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+      }
+      border: 3px solid $lightgray;
+      padding: 0 10px 20px;
+      width: 95%;
+      ul {
+        margin-top: 15px;
+        padding-left: 27px;
+        li {
+          margin: 15px 0;
+          font-size: 16px;
+        }
+      }
     }
     h2 {
       margin: 40px 0 20px;

@@ -1,4 +1,15 @@
 <div class="p2-table-wrapper">
+    <div class="p2-totals" ng-show="totalTime != 0" ng-click="showTotals = !showTotals">
+        <h2 class="total-time">Weekly Total ({{totalTime}})</h2>
+        <ul ng-show="showTotals">
+            <div ng-repeat="project in projects">
+                <li ng-show="projectTime[project]" >
+                    <strong>{{decimalToTime(projectTime[project])}}</strong> &ndash; {{project}}
+                </li>
+            </div>
+        </ul>
+    </div>
+
     <div ng-repeat="day in reverseWeekdays">
         <div ng-show="timeEntries[day.code].length > 0">
             <h2>{{day.name}} ({{sumTime(timeEntries[day.code])}})</h2>
