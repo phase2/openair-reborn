@@ -18,7 +18,7 @@
                     <td class="p2-time">
                         <timer start-time="entry.timerStart" autostart="false" interval="1000">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
                     </td>
-                    <td class="p2-project">{{entry.projectName}} <span>({{entry.taskName}})</span></td>
+                    <td class="p2-project"><span class="p2-project-color p2-project-color-{{projectNameToColor(entry.projectName)}}">{{entry.projectName}}</span><br /><span class="p2-task-name">({{entry.taskName}})</span></td>
                     <td class="p2-notes">{{entry.notes}}</td>
                     <td class="p2-edit">
                         <a href="#" class="p2-timer-link" title="Toggle Timer" ng-click="toggleTimer(entry)">Start Timer</a>

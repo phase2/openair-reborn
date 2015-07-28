@@ -401,6 +401,18 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     });
 
     /**
+     * Convert a project's name to the color it should be given.
+     *
+     * @param projectName
+     * @returns {number}
+     */
+    $scope.projectNameToColor = function(projectName) {
+        var clientName = projectName.split(':')[0];
+        var clientLength = clientName.length;
+        return clientLength % 10;
+    };
+
+    /**
      * Adds an "Enter" key listener to submit the form on Enter press
      * if the fields have been filled out.
      *

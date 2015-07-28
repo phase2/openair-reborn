@@ -300,7 +300,7 @@ table.timesheet {
     .p2-project {
       width: 30%;
       color: black;
-      span {
+      span.p2-task-name {
         color: #777;
         font-size: 12px;
       }
@@ -337,6 +337,25 @@ table.timesheet {
         }
       }
     }
+    .p2-project-color {
+      text-shadow: 0 1px 0 rgba(70,70,70,.4);
+      padding: 2px 5px !important;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-family: 'Open Sans', arial, sans-serif;
+      color: white;
+      border-radius: 2px;
+    }
+    .p2-project-color-1 { background-color: #4dc3ff; }
+    .p2-project-color-2 { background-color: #bc85e6; }
+    .p2-project-color-3 { background-color: #df7baa; }
+    .p2-project-color-4 { background-color: #268bb5; }
+    .p2-project-color-5 { background-color: #094558; }
+    .p2-project-color-6 { background-color: #8ab734; }
+    .p2-project-color-7 { background-color: #14a88e; }
+    .p2-project-color-8 { background-color: #a4506c; }
+    .p2-project-color-9 { background-color: #6668b4; }
+    .p2-project-color-0 { background-color: #bc2d07; }
   }
   tr {
     -webkit-animation: blue-fade 0.5s ease-in 1;
