@@ -155,7 +155,9 @@ table.timesheet {
     .p2-row div.p2-input-wrapper {
       width: 29.5%;
       display: inline-block;
-      margin-top: 20px;
+      @media (max-width: 768px) {
+        margin-top: 20px;
+      }
       input {
         width: 90%;
       }
@@ -207,6 +209,11 @@ table.timesheet {
           width: 100% !important;
         }
       }
+    }
+
+    .p2-button-wrapper {
+      position: relative;
+      top: 17px;
     }
 
     @media (max-width: 768px) {
