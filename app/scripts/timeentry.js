@@ -9,7 +9,7 @@
  * @file An Angular controller used for managing the custom UI for OpenAir.
  */
 
-app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($scope, OpenAirService) {
+app.controller('TimeEntryController', ['$scope', '$timeout', 'OpenAirService', function($scope, $timeout, OpenAirService) {
 
     /**
      * Adds time to the list of time entries.
@@ -311,6 +311,7 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
     $scope.loadSettings = function() {
         $scope.loadSetting('timeFormat', 'hhmm');
         $scope.loadSetting('multipleTimers', 1);
+        $scope.loadSetting('autosave', 0);
     };
 
     /**
@@ -450,5 +451,28 @@ app.controller('TimeEntryController', ['$scope', 'OpenAirService', function($sco
                 $scope.$apply();
             }
         }
+    });
+
+    /**
+     * Save the timesheet by programmatically clicking the save button.
+     */
+    $scope.submitTimesheet = function() {
+        if ($scope.autosave === "1") {
+            angular.element('#timesheet_savebutton').click();
+        }
+    };
+
+    // Auto-save the form every 10 minutes of inactivity.
+    var autosaveTimer;
+    $scope.resetTimeout = function() {
+        if (autosaveTimer) {
+            $timeout.cancel(autosaveTimer);
+        }
+        autosaveTimer = $timeout($scope.submitTimesheet, 1000 * 60 * 15);
+    };
+
+    // Reset the timeout if the page is in use.
+    angular.element('body').mousemove(function(){
+        $scope.resetTimeout();
     });
 }]);

@@ -43,6 +43,14 @@
                     </select>
                     <p class="description">Choosing "No" will automatically stop a running timer whenever a new one is started.</p>
                 </div>
+                <div class="form-input-wrapper">
+                    <label for="autosave">Auto-save timesheet</label>
+                    <select id="autosave"  name="autosave" ng-model="autosave">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    <p class="description">Choosing "Yes" will automatically save your timesheet every 15 minutes.</p>
+                </div>
                 <!--
                 <div class="form-input-wrapper">
                     <label for="persistentTimers">Persistent timers</label>

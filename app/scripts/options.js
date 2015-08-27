@@ -14,7 +14,8 @@ app.controller('OptionsController', ['$scope', function($scope) {
         chrome.storage.sync.set({
             timeFormat : $scope.timeFormat,
             multipleTimers : $scope.multipleTimers,
-            persistentTimers : $scope.persistentTimers
+            persistentTimers : $scope.persistentTimers,
+            autosave : $scope.autosave
         }, function() {
             $scope.status = "Settings saved successfully.";
             $scope.$apply();
@@ -67,6 +68,7 @@ app.controller('OptionsController', ['$scope', function($scope) {
         $scope.load('timeFormat', 'hhmm');
         $scope.load('multipleTimers', 1);
         $scope.load('persistentTimers', 1);
+        $scope.load('autosave', 0);
     };
 
     // And away we go...
