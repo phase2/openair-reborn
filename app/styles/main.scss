@@ -229,14 +229,16 @@ table.timesheet {
         .chosen-container,
         input {
           width: 100% !important;
+          float: none;
         }
         &.p2-button-wrapper {
           clear: both;
           display: block;
           width: 100%;
+          top: 0;
           input {
             width: 100%;
-            margin-left: 0;
+            margin-left: 0 !important;
           }
         }
       }
