@@ -17,7 +17,6 @@ Don't be scared! Setup only takes 2 minutes.
 2. Open up the root directory in a terminal
 3. Run `npm install` to install the node dependencies, such as grunt and bower
 4. Run `bower install` to install the bower components
-5. Run `bower install` again in `test/` to install the testing bower components
 
 **Step 2: Enable the extension**
 
@@ -28,7 +27,7 @@ Don't be scared! Setup only takes 2 minutes.
 
 **Step 3: Start developing**
 
-1. Run `grunt debug` and confirm that you see something [like this](http://note.io/1rgHkvn).
+1. Run `grunt debug`.
 2. Edit some code. The extension itself should reload automatically (thanks Yeoman!),
    and SCSS changes should be auto-compiled to CSS and applied to the page without
    reloading, but you still have to reload the OpenAir tab to make it pick up any JS changes.
