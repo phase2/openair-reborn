@@ -81,6 +81,7 @@ table.timesheet {
 // Styles for OpenAir Reborn start here
 .timesheetPinned,
 #timesheet_grid,
+.contentFooter,
 #timesheet_header,
 #timesheet_header_lower {
   display: none;
@@ -89,9 +90,9 @@ table.timesheet {
 #p2_content {
   width: 100%;
   padding-left: 4em;
+  padding-bottom: 50px;
   margin-top: 2em;
   box-sizing: border-box;
-
   * {
     box-sizing: border-box;
   }

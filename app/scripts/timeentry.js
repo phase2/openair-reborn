@@ -9,7 +9,11 @@
  * @file An Angular controller used for managing the custom UI for OpenAir.
  */
 
-app.controller('TimeEntryController', ['$scope', '$timeout', 'OpenAirService', function($scope, $timeout, OpenAirService) {
+app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenAirService', function($scope, $timeout, $interval, OpenAirService) {
+
+    $scope.tasks = {};
+    $scope.projectTime = {};
+    $scope.showTotals = false;
 
     /**
      * Adds time to the list of time entries.
@@ -349,21 +353,6 @@ app.controller('TimeEntryController', ['$scope', '$timeout', 'OpenAirService', f
     // @TODO: Use a filter instead.
     $scope.reverseWeekdays = $scope.weekdays.reverse();
 
-    // Initialize the list of projects on page load.
-    $scope.projects = OpenAirService.fetchProjects();
-
-    // The list of tasks stays empty until a project is selected.
-    $scope.tasks = {};
-
-    // Initialize the time entries by grabbing them out of the OpenAir grid.
-    $scope.timeEntries = OpenAirService.parseTimesheet();
-    $scope.totalTime = OpenAirService.fetchWeekTime();
-
-    // The total time for each project.
-    $scope.projectTime = {};
-    $scope.sumProjectTime();
-    $scope.showTotals = false;
-
     // Default the "Day" field to the current day.
     $scope.when = [$scope.getDay()];
 
@@ -382,24 +371,6 @@ app.controller('TimeEntryController', ['$scope', '$timeout', 'OpenAirService', f
     if (document.URL.indexOf('MESSAGE') === -1) {
         chrome.storage.sync.set({ timesheetUrl : document.URL });
     }
-
-    OpenAirService.addPreviewButton();
-
-    // Add the click handler to the preview button.
-    angular.element('#p2_preview').click(function(e) {
-        e.preventDefault();
-        angular.element('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned').toggle();
-        var $button = angular.element(e.target);
-        if ($button.text() === 'Preview') {
-            $button.text('Edit');
-        } else {
-            $button.text('Preview');
-            // We're going back to our time table away from OA's time grid, which means some changes may have
-            // been made to the time grid directly, so we need to update our time list to pick them up.
-            $scope.timeEntries = OpenAirService.parseTimesheet();
-            $scope.$apply();
-        }
-    });
 
     /**
      * Convert a project's name to the color it should be given.
@@ -449,6 +420,8 @@ app.controller('TimeEntryController', ['$scope', '$timeout', 'OpenAirService', f
                 // This .$apply() is needed when submitting the form in this
                 // fashion, otherwise it re-renders fine without it.
                 $scope.$apply();
+            } else {
+                $('#timesheet_savebutton').click();
             }
         }
     });
@@ -475,4 +448,22 @@ app.controller('TimeEntryController', ['$scope', '$timeout', 'OpenAirService', f
     angular.element('body').mousemove(function(){
         $scope.resetTimeout();
     });
+
+    /**
+     * Initialize the time entries by grabbing them out of the OpenAir grid.
+     */
+    $scope.initializeFromTimesheet = function() {
+        if ($('#timesheet_grid').length < 1) {
+            return;
+        }
+
+        $scope.projects = OpenAirService.fetchProjects();
+        $scope.timeEntries = OpenAirService.parseTimesheet();
+        $scope.totalTime = OpenAirService.fetchWeekTime();
+        OpenAirService.addPreviewButton();
+        $scope.sumProjectTime();
+        $interval.cancel(checkForTimesheet);
+    };
+
+    var checkForTimesheet = $interval($scope.initializeFromTimesheet, 100);
 }]);

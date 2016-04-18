@@ -373,12 +373,27 @@ app.service('OpenAirService', function() {
      * Adds the "Preview" button to the make and makes it work.
      * This is regular old jQuery because the button goes outside our Angular app's container div, so we
      * can't easily touch it with Angular magic.
-     *
-     * @TODO: Convert to Angular magic instead of jQuery dookie.
      */
     this.addPreviewButton = function() {
-        $('#timesheet_savebutton').insertBefore('#save_grid_submit');
-        $('<button id="p2_preview" class="btn-oa">Preview</button>').insertAfter('#timesheet_savebutton');
+        // Add the Preview button where we want it.
+        angular.element('#timesheet_savebutton').insertBefore('#save_grid_submit');
+        angular.element('<button id="p2_preview" class="btn-oa">Preview</button>').insertAfter('#timesheet_savebutton');
+
+        // Add the click handler to the preview button.
+        angular.element('#p2_preview').click(function(e) {
+            e.preventDefault();
+            angular.element('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned, .contentFooter').toggle();
+            var $button = angular.element(e.target);
+            if ($button.text() === 'Preview') {
+                $button.text('Edit');
+            } else {
+                $button.text('Preview');
+                // We're going back to our time table away from OA's time grid, which means some changes may have
+                // been made to the time grid directly, so we need to update our time list to pick them up.
+                $scope.timeEntries = OpenAirService.parseTimesheet();
+                $scope.$apply();
+            }
+        });
     };
 
     /**
