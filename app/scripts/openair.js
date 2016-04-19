@@ -382,7 +382,7 @@ app.service('OpenAirService', function() {
         // Add the click handler to the preview button.
         angular.element('#p2_preview').click(function(e) {
             e.preventDefault();
-            angular.element('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned, .contentFooter').toggle();
+            angular.element('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned, .contentFooter, .bodyIndent, #oa3_footer_spacer').toggle();
             var $button = angular.element(e.target);
             if ($button.text() === 'Preview') {
                 $button.text('Edit');
