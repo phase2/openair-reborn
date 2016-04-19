@@ -4,6 +4,7 @@
 /*global app:false */
 /*global alert:false */
 /*global confirm:false */
+// jshint multistr:true
 
 /**
  * @file An Angular controller used for managing the custom UI for OpenAir.
@@ -456,6 +457,24 @@ app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenA
         if (angular.element('#timesheet_grid').length < 1) {
             return;
         }
+
+        // Hide a bunch of OA stuff we don't want. We can't do this from CSS because
+        // that makes it also hide on pages that we don't want to touch, such as the reports.
+        // This is a total hack, but it's necessary at the moment.
+        angular.element("<style>")
+            .prop("type", "text/css")
+            .html("\
+                .timesheetPinned,\
+                #timesheet_grid,\
+                .contentFooter,\
+                .bodyIndent,\
+                #timesheet_header,\
+                #oa3_footer_spacer,\
+                #timesheet_header_lower {\
+                    display: none;\
+                }"
+            )
+            .appendTo("head");
 
         $scope.projects = OpenAirService.fetchProjects();
         $scope.timeEntries = OpenAirService.parseTimesheet();
