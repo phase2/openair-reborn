@@ -421,7 +421,7 @@ app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenA
                 // fashion, otherwise it re-renders fine without it.
                 $scope.$apply();
             } else {
-                $('#timesheet_savebutton').click();
+                angular.element('#timesheet_savebutton').click();
             }
         }
     });
@@ -453,16 +453,34 @@ app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenA
      * Initialize the time entries by grabbing them out of the OpenAir grid.
      */
     $scope.initializeFromTimesheet = function() {
-        if ($('#timesheet_grid').length < 1) {
+        if (angular.element('#timesheet_grid').length < 1) {
             return;
         }
 
         $scope.projects = OpenAirService.fetchProjects();
         $scope.timeEntries = OpenAirService.parseTimesheet();
         $scope.totalTime = OpenAirService.fetchWeekTime();
-        OpenAirService.addPreviewButton();
         $scope.sumProjectTime();
         $interval.cancel(checkForTimesheet);
+
+        // Add the Preview button to the page and make it work.
+        OpenAirService.addPreviewButton();
+        angular.element('#p2_preview').click(function(e) {
+            e.preventDefault();
+            angular.element('#p2_sidebar, #p2_content, #timesheet_grid, .timesheetPinned, .contentFooter, .bodyIndent, #oa3_footer_spacer').toggle();
+            var $button = angular.element(e.target);
+            if ($button.text() === 'Preview') {
+                $button.text('Edit');
+            } else {
+                $button.text('Preview');
+                // We're going back to our time table away from OA's time grid, which means some changes may have
+                // been made to the time grid directly, so we need to update our time list to pick them up.
+                $scope.timeEntries = OpenAirService.parseTimesheet();
+                $scope.totalTime = OpenAirService.fetchWeekTime();
+                $scope.sumProjectTime();
+                $scope.$apply();
+            }
+        });
     };
 
     var checkForTimesheet = $interval($scope.initializeFromTimesheet, 100);
