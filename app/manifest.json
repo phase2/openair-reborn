@@ -1,6 +1,6 @@
 {
     "name": "__MSG_appName__",
-    "version": "0.0.30",
+    "version": "0.0.31",
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "icons": {
@@ -28,7 +28,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.openair.com/timesheet.pl*"
+                "https://www.openair.com/timesheet.pl*",
+                "https://preview.openair.com/timesheet.pl*"
             ],
             "css": [
                 "styles/main.css",
