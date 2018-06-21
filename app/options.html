@@ -51,6 +51,19 @@
                     </select>
                     <p class="description">Choosing "Yes" will automatically save your timesheet after 15 minutes of inactivity.</p>
                 </div>
+                <div class="form-input-wrapper">
+                    <label for="firstDayOfWeek">First day of the week</label>
+                    <select id="firstDayOfWeek"  name="firstDayOfWeek" ng-model="firstDayOfWeek">
+                        <option value="su">Sunday</option>
+                        <option value="mo">Monday</option>
+                        <option value="tu">Tuesday</option>
+                        <option value="we">Wednesday</option>
+                        <option value="th">Thursday</option>
+                        <option value="fr">Friday</option>
+                        <option value="sa">Saturday</option>
+                    </select>
+                    <p class="description">Select the first day of the week. This can be set by the business, and will be the first time entry column.</p>
+                </div>
                 <!--
                 <div class="form-input-wrapper">
                     <label for="persistentTimers">Persistent timers</label>

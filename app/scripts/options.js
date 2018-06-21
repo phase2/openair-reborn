@@ -15,7 +15,8 @@ app.controller('OptionsController', ['$scope', function($scope) {
             timeFormat : $scope.timeFormat,
             multipleTimers : $scope.multipleTimers,
             persistentTimers : $scope.persistentTimers,
-            autosave : $scope.autosave
+            autosave : $scope.autosave,
+            firstDayOfWeek : $scope.firstDayOfWeek,
         }, function() {
             $scope.status = "Settings saved successfully.";
             $scope.$apply();
@@ -69,6 +70,7 @@ app.controller('OptionsController', ['$scope', function($scope) {
         $scope.load('multipleTimers', 1);
         $scope.load('persistentTimers', 1);
         $scope.load('autosave', 0);
+        $scope.load('firstDayOfWeek', 'mo');
     };
 
     // And away we go...

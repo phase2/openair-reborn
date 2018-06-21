@@ -13,6 +13,8 @@
  */
 app.service('OpenAirService', function() {
 
+    this.firstDayOfWeek = 'mo';
+
     var parent = this; // Used in functions below to reference other functions below.
 
     /**
@@ -382,6 +384,7 @@ app.service('OpenAirService', function() {
 
     /**
      * Helper function to convert two digit day code to integer.
+     * This takes the "first day of week" setting into account
      *
      * @TODO: Start using numbers instead of day codes. It'll remove a lot of dumb logic.
      *
@@ -389,14 +392,29 @@ app.service('OpenAirService', function() {
      * @returns {int}
      */
     this.getDayNum = function(dayCode) {
-        var  weekdays = [];
-        weekdays.mo = 0;
-        weekdays.tu = 1;
-        weekdays.we = 2;
-        weekdays.th = 3;
-        weekdays.fr = 4;
-        weekdays.sa = 5;
-        weekdays.su = 6;
+        var  weekdays = {};
+        var days = [
+            'su',
+            'mo',
+            'tu',
+            'we',
+            'th',
+            'fr',
+            'sa',
+        ];
+
+        // figure out which day is the first day
+        var firstDayStr = parent.firstDayOfWeek;
+        var firstDayIndex = days.findIndex(function (d) { return d === firstDayStr; });
+
+        // assign integers for each day, looping around where necessary
+        days.forEach(function (day, i) {
+            var index = i - firstDayIndex;
+            if(index < 0) {
+                index = days.length + index;
+            }
+            weekdays[day] = index;
+        });
         return weekdays[dayCode];
     };
 
