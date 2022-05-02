@@ -297,12 +297,15 @@ app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenA
      * @param {string} optionName
      * @param {mixed} defaultVal
      */
-    $scope.loadSetting = function(optionName, defaultVal) {
+    $scope.loadSetting = function(optionName, defaultVal, callback) {
         var exists = false;
         chrome.storage.sync.get(optionName, function (obj) {
             if (obj[optionName]) {
                 exists = true;
                 $scope[optionName] = obj[optionName];
+            }
+            if(callback) {
+                callback();
             }
         });
         if (!exists) {
@@ -317,6 +320,34 @@ app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenA
         $scope.loadSetting('timeFormat', 'hhmm');
         $scope.loadSetting('multipleTimers', 1);
         $scope.loadSetting('autosave', 0);
+        $scope.loadSetting('firstDayOfWeek', 'fr', $scope.afterFirstDayOfWeekLoaded);
+    };
+
+    /**
+     * Callback after the firstDayOfWeek setting has been loaded
+     * After we load this, we can pass it to OpenAirService and set up everything that relies on it
+     */
+    $scope.afterFirstDayOfWeekLoaded = function() {
+        // set the first day of the week for calculations
+        OpenAirService.firstDayOfWeek = $scope.firstDayOfWeek;
+
+        // Days of the week, to match code to day and cycle through in the view.
+        $scope.weekdays = [
+            {code: "mo", name: 'Monday', shortName: 'Mo', timestamp: OpenAirService.getDateTimestamp("mo")},
+            {code: "tu", name: 'Tuesday', shortName: 'Tu', timestamp: OpenAirService.getDateTimestamp("tu")},
+            {code: "we", name: 'Wednesday', shortName: 'We', timestamp: OpenAirService.getDateTimestamp("we")},
+            {code: "th", name: 'Thursday', shortName: 'Th', timestamp: OpenAirService.getDateTimestamp("th")},
+            {code: "fr", name: 'Friday', shortName: 'Fr', timestamp: OpenAirService.getDateTimestamp("fr")},
+            {code: "sa", name: 'Saturday', shortName: 'Sa', timestamp: OpenAirService.getDateTimestamp("sa")},
+            {code: "su", name: 'Sunday', shortName: 'Su', timestamp: OpenAirService.getDateTimestamp("su")}
+        ];
+
+        // The time table is listed in reverse order.
+        // @TODO: Use a filter instead.
+        $scope.reverseWeekdays = $scope.weekdays.reverse();
+
+        // Default the "Day" field to the current day.
+        $scope.when = [$scope.getDay()];
     };
 
     /**
@@ -338,27 +369,6 @@ app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenA
         weekdays[6] = "sa";
         return weekdays;
     };
-
-    // Days of the week, to match code to day and cycle through in the view.
-    $scope.weekdays = [
-        {code: "mo", name: 'Monday', shortName: 'Mo', timestamp: OpenAirService.getDateTimestamp("mo")},
-        {code: "tu", name: 'Tuesday', shortName: 'Tu', timestamp: OpenAirService.getDateTimestamp("tu")},
-        {code: "we", name: 'Wednesday', shortName: 'We', timestamp: OpenAirService.getDateTimestamp("we")},
-        {code: "th", name: 'Thursday', shortName: 'Th', timestamp: OpenAirService.getDateTimestamp("th")},
-        {code: "fr", name: 'Friday', shortName: 'Fr', timestamp: OpenAirService.getDateTimestamp("fr")},
-        {code: "sa", name: 'Saturday', shortName: 'Sa', timestamp: OpenAirService.getDateTimestamp("sa")},
-        {code: "su", name: 'Sunday', shortName: 'Su', timestamp: OpenAirService.getDateTimestamp("su")}
-    ];
-
-    // The time table is listed in reverse order.
-    // @TODO: Use a filter instead.
-    $scope.reverseWeekdays = $scope.weekdays.reverse();
-
-    // Default the "Day" field to the current day.
-    $scope.when = [$scope.getDay()];
-
-    // Load in any user settings if saved, otherwise just load the defaults.
-    $scope.loadSettings();
 
     // Update the submit button's value based on whether the time field has a value or not.
     $scope.$watch('time', function(newTime) {
@@ -503,4 +513,7 @@ app.controller('TimeEntryController', ['$scope', '$timeout', '$interval', 'OpenA
     };
 
     var checkForTimesheet = $interval($scope.initializeFromTimesheet, 100);
+
+    // Load in any user settings if saved, otherwise just load the defaults.
+    $scope.loadSettings();
 }]);
