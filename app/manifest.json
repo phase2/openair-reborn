@@ -28,9 +28,7 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.openair.com/timesheet.pl*",
-                "https://preview.openair.com/timesheet.pl*",
-                "https://*.app.openair.com/timesheet.pl*"
+                "https://*.openair.com/timesheet.pl*"
             ],
             "css": [
                 "styles/main.css",

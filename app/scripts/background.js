@@ -10,9 +10,9 @@ chrome.browserAction.onClicked.addListener(function() {
         if (obj.timesheetUrl) {
             url = obj.timesheetUrl;
         } else {
-            url = 'http://openair.com/index.pl';
+            url = 'https://*.openair.com/index.pl';
         }
-        chrome.tabs.query({url: 'https://www.openair.com/timesheet.pl?uid=*'}, function (tabs) {
+        chrome.tabs.query({url: 'https://*.openair.com/timesheet.pl?uid=*'}, function (tabs) {
             if (tabs.length > 0) {
                 chrome.tabs.update(tabs[0].id, {selected: true});
             } else {
